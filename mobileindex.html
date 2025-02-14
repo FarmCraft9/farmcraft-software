@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmcraft Software - Mobile Version</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #181818;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .white-mode {
+            background-color: #ffffff;
+            color: #333333;
+        }
+        .container {
+            width: 100%;
+            padding: 30px;
+            border-radius: 20px;
+            background: #222222;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s, box-shadow 0.3s;
+            position: relative;
+            text-align: center;
+        }
+        .white-mode .container {
+            background: #f9f9f9;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #f4a261;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .intro-text {
+            font-size: 1.2rem;
+            color: #b4b4b4;
+            margin-bottom: 40px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #f4a261;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 10px 0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .button:hover {
+            background-color: #e76f51;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        .line {
+            width: 60%;
+            height: 3px;
+            margin: 40px auto;
+            background-color: #444;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+        .mod-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .mod-item {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .white-mode .mod-item {
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .mod-item:hover {
+            transform: translateY(-12px);
+            background-color: #444;
+        }
+        .white-mode .mod-item:hover {
+            background-color: #e5e5e5;  /* Lighter dark white on hover for white theme */
+        }
+        .mod-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .mod-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(80%);
+        }
+        .mod-item h3 {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            color: #f4a261;
+            letter-spacing: 0.5px;
+        }
+        .mod-item p {
+            font-size: 1rem;
+            color: #b4b4b4;
+            margin-top: 10px;
+        }
+        .download-button {
+            background-color: #3a9d23;
+        }
+        .download-button:hover {
+            background-color: #2c7c1e;
+        }
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #f4a261;
+            transition: color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .theme-switcher:hover {
+            color: #e76f51;
+        }
+        .theme-switcher i {
+            transition: transform 0.3s;
+        }
+
+        /* Mobile Version Styling */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .intro-text {
+                font-size: 1.1rem;
+            }
+            .mod-item {
+                padding: 10px;
+            }
+            .mod-item h3 {
+                font-size: 1.3rem;
+            }
+            .mod-item p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Hide Desktop Switch Button on Mobile */
+        .desktop-notice {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <button class="theme-switcher" onclick="toggleMode()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="container">
+        <h1>Farmcraft Software</h1>
+        <p class="intro-text">Discover the best mods and tools for Farming Simulator 25 and enhance your farming experience.</p>
+        <a href="#mods" class="button">Explore Mods</a>
+        
+        <div class="line"></div>
+        
+        <div class="mods-section" id="mods">
+            <h2>Featured Mods</h2>
+            <div class="mod-list">
+                <!-- Example Mod Item 1 -->
+                <div class="mod-item">
+                    <img src="https://via.placeholder.com/300x160?text=Mod+1" alt="Mod 1 Image">
+                    <h3>Mod Name 1</h3>
+                    <p>Enhance your farming experience with this amazing mod!</p>
+                    <a href="#" class="button download-button">Download</a>
+                </div>
+                <!-- Example Mod Item 2 -->
+                <div class="mod-item">
+                    <img src="https://via.placeholder.com/300x160?text=Mod+2" alt="Mod 2 Image">
+                    <h3>Mod Name 2</h3>
+                    <p>Unlock new features to make your gameplay more immersive.</p>
+                    <a href="#" class="button download-button">Download</a>
+                </div>
+                <!-- Example Mod Item 3 -->
+                <div class="mod-item">
+                    <img src="https://via.placeholder.com/300x160?text=Mod+3" alt="Mod 3 Image">
+                    <h3>Mod Name 3</h3>
+                    <p>Upgrade your Farming Simulator 25 with these incredible tools!</p>
+                    <a href="#" class="button download-button">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop site switch notice (hidden on mobile) -->
+    <div class="desktop-notice" id="desktopNotice">
+        <button onclick="switchToDesktopSite()">Switch to Desktop site</button>
+    </div>
+
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('white-mode');
+            const button = document.querySelector('.theme-switcher');
+            const icon = document.querySelector('.theme-switcher i');
+            const line = document.querySelector('.line');
+
+            // Change icon
+            if (body.classList.contains('white-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                line.style.backgroundColor = '#f0f0f0';  // Light mode line color
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                line.style.backgroundColor = '#333333';  // Dark mode line color
+            }
+        }
+
+        function checkDevice() {
+            const desktopNotice = document.getElementById('desktopNotice');
+            if (window.innerWidth > 768) {
+                desktopNotice.style.display = 'block';
+            } else {
+                desktopNotice.style.display = 'none';
+            }
+        }
+
+        function switchToDesktopSite() {
+            alert("Redirecting to desktop version...");
+            // Add redirection to desktop version URL here
+        }
+
+        window.onload = checkDevice;  // Check device on page load
+        window.onresize = checkDevice; // Check device on window resize
+    </script>
+</body>
+</html>
