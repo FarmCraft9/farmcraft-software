@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Reports and Ideas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #181818;
+            color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 40px;
+            border-radius: 20px;
+            background: #222222;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #f4a261;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .button {
+            background-color: #f4a261;
+            color: white;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            border-radius: 50px;
+            margin: 10px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #e76f51;
+        }
+        .line {
+            width: 60%;
+            height: 3px;
+            margin: 40px auto;
+            background-color: #444;
+        }
+        .report-list {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 1.1rem;
+            color: #b4b4b4;
+        }
+        .report-item {
+            background-color: #333;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .report-item h3 {
+            font-size: 1.5rem;
+            color: #f4a261;
+            display: inline;
+        }
+        .report-item span {
+            font-size: 1rem;
+            color: #f4a261;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        .report-item p {
+            margin-top: 10px;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .read-more {
+            color: #4fa3f7;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: underline;
+        }
+        .read-more:hover {
+            color: #397bbd;
+        }
+        .description-box {
+            display: none;
+            background: #444;
+            color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bug Reports & Ideas</h1>
+        <div class="buttons">
+            <button class="button" onclick="showCreateForm('bug')">Create Bug Report</button>
+            <button class="button" onclick="showCreateForm('idea')">Create Idea</button>
+            <button class="button" onclick="viewReports()">View Bug Reports & Ideas</button>
+        </div>
+
+        <div class="line"></div>
+
+        <div id="createForm" style="display: none;">
+            <h2>Create a New Report</h2>
+            <input type="text" id="reportTitle" placeholder="Title" style="width: 100%; padding: 10px; margin: 10px 0;">
+            <textarea id="reportDescription" placeholder="Description" style="width: 100%; padding: 10px; height: 100px; margin-bottom: 20px;"></textarea>
+            <button class="button" onclick="submitReport()">Submit</button>
+        </div>
+
+        <div id="reportList" class="report-list" style="display: none;"></div>
+
+    </div>
+
+    <script>
+        const expirationTime = 48 * 60 * 60 * 1000; // 48 hours in milliseconds
+
+        function showCreateForm(type) {
+            const createForm = document.getElementById("createForm");
+            createForm.style.display = "block";
+            document.getElementById("reportTitle").value = "";
+            document.getElementById("reportDescription").value = "";
+            localStorage.setItem('reportType', type);
+        }
+
+        function submitReport() {
+            const title = document.getElementById("reportTitle").value;
+            const description = document.getElementById("reportDescription").value;
+            const type = localStorage.getItem('reportType');
+
+            // Validate title and description length
+            if (type === 'bug' && title.length > 50) {
+                alert('Bug Report title must be 50 characters or less.');
+                return;
+            } else if (type === 'idea' && title.length > 40) {
+                alert('Idea title must be 40 characters or less.');
+                return;
+            }
+
+            if (type === 'bug' && description.length > 1000) {
+                alert('Bug Report description must be 1000 characters or less.');
+                return;
+            } else if (type === 'idea' && description.length > 800) {
+                alert('Idea description must be 800 characters or less.');
+                return;
+            }
+
+            const timestamp = Date.now(); // Current time in milliseconds
+            const newReport = { title, description, type, timestamp };
+
+            let reports = JSON.parse(localStorage.getItem('reports')) || [];
+            reports.push(newReport);
+            localStorage.setItem('reports', JSON.stringify(reports));
+
+            alert(`${type === 'bug' ? 'Bug Report' : 'Idea'} Submitted Successfully!`);
+            document.getElementById("createForm").style.display = "none";
+            viewReports();
+        }
+
+        function viewReports() {
+            const reports = JSON.parse(localStorage.getItem('reports')) || [];
+            const currentTime = Date.now();
+            const validReports = reports.filter(report => (currentTime - report.timestamp) < expirationTime); // Filter reports older than 48 hours
+
+            // Save filtered reports back to localStorage
+            localStorage.setItem('reports', JSON.stringify(validReports));
+
+            const reportList = document.getElementById("reportList");
+
+            if (validReports.length === 0) {
+                reportList.innerHTML = "<p>No reports available.</p>";
+            } else {
+                reportList.innerHTML = "";
+                validReports.forEach(report => {
+                    const reportItem = document.createElement("div");
+                    reportItem.classList.add("report-item");
+                    const readMoreButton = report.description.length > 20 ? `<span class="read-more" onclick="showDescriptionBox('${report.title}')">Read more</span>` : "";
+                    reportItem.innerHTML = `
+                        <h3>${report.title}</h3><span>(${report.type === 'bug' ? 'Bug Report' : 'Idea'})</span>
+                        <p>${report.description.slice(0, 100)}...</p>
+                        ${readMoreButton}
+                        <div id="desc-box-${report.title}" class="description-box">${report.description}</div>
+                    `;
+                    reportList.appendChild(reportItem);
+                });
+            }
+
+            document.getElementById("reportList").style.display = "block";
+        }
+
+        function showDescriptionBox(title) {
+            const descriptionBox = document.getElementById(`desc-box-${title}`);
+            descriptionBox.style.display = descriptionBox.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
