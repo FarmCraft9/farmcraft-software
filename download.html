@@ -127,34 +127,29 @@
     </div>
 
     <script>
-        // Correct keys
-        const correctKeys = [
-            "RA46-DAKB-G2B4-JE6W",
-            "8YYE-ZY6C-B1Y4-RCWW",
-            "CF1Z-7ONY-GBD7-QF34",
-            "2TIC-FJ78-I80B-A6B6",
-            "VQ9I-1262-B8T7-O0HL",
-            "VKDC-4ORY-MY8I-5BZP",
-            "PV1K-MC5A-SQ06-9GP7",
-            "UJD6-DLXN-F9I5-ES05",
-            "6CIZ-M84Y-VTAB-0VOY",
-            "469R-C8WW-FRVY-Y3Z5",
-            "L1QR-4FW3-SATX-ZK6U",
-            "BE4H-RLW8-3MIS-R63J",
-            "Z3CH-JW90-Y63M-4J1I",
-            "MG8S-EH6X-RMNR-QGT2",
-            "SD9C-9XFT-K9ZO-2RRZ"
-        ];
+function validateKey() {
+    const inputKey = document.getElementById("product-key").value;
+    const errorMessage = document.getElementById("error-message");
 
-        function validateKey() {
-            const inputKey = document.getElementById("product-key").value;
-            const errorMessage = document.getElementById("error-message");
-            if (correctKeys.includes(inputKey)) {
-                window.location.href = "download/fieldsimulator2025"; // Redirect to download page
-            } else {
-                errorMessage.style.display = "block";
-            }
+    // Make an AJAX request to the backend for key validation
+    fetch('/validate-key', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ key: inputKey })
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = "download/fieldsimulator2025"; // Redirect to download page
+        } else {
+            errorMessage.style.display = "block";
         }
-    </script>
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        errorMessage.style.display = "block";
+    });
+}</script>
 </body>
 </html>
