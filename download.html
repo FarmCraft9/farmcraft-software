@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmcraft Software</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,100 +12,72 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #181818;
-            color: #f0f0f0;
+            font-family: 'Press Start 2P', cursive;
+            background: repeating-linear-gradient(
+                0deg,
+                #222 0px,
+                #222 3px,
+                #1a1a1a 3px,
+                #1a1a1a 6px
+            );
+            color: #00ff00;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             text-align: center;
             overflow: hidden;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .white-mode {
-            background-color: #ffffff;
-            color: #333333;
         }
         .container {
             width: 100%;
             max-width: 600px;
             padding: 40px;
-            border-radius: 20px;
-            background: #222222;
-            transition: background 0.3s, box-shadow 0.3s;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        .white-mode .container {
-            background: #f9f9f9;
+            border: 6px solid #00ff00;
+            background-color: #111;
+            box-shadow: 6px 6px 0px #00ff00;
         }
         h1 {
-            font-size: 4rem;
-            color: #f4a261;
-            font-weight: 700;
+            font-size: 1.5rem;
+            color: #ffcc00;
+            text-shadow: 3px 3px #800000;
             margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
         }
         .intro-text {
-            font-size: 1.3rem;
-            color: #b4b4b4;
-            margin-bottom: 20px; /* Reduced margin to move it up */
-        }
-        .button {
-            display: inline-block;
-            background-color: #f4a261;
-            color: white;
-            padding: 16px 40px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 10px 0;
-        }
-        .button:hover {
-            background-color: #e76f51;
-            transform: translateY(-5px);
-        }
-        .line {
-            width: 60%;
-            height: 3px;
-            margin: 40px auto;
-            background-color: #444;
-            border-radius: 10px;
-            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            color: #00ff00;
+            margin-bottom: 20px;
         }
         .input-group {
-            margin: 30px 0 20px 0; /* Adjusted margin for spacing */
+            margin: 20px 0;
         }
         .input-group input {
-            padding: 10px;
-            font-size: 1.2rem;
+            padding: 12px;
+            font-size: 1rem;
             width: 80%;
-            border-radius: 8px;
-            border: 1px solid #888;
+            border: 4px solid #00ff00;
+            background-color: #000;
+            color: #00ff00;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
         }
         .input-group button {
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            background-color: #3a9d23;
+            padding: 12px 20px;
+            font-size: 1rem;
+            background-color: #ff0000;
             color: white;
-            border-radius: 8px;
-            border: none;
+            border: 4px solid #ffcc00;
+            box-shadow: 4px 4px 0px #ffcc00;
             cursor: pointer;
-            margin-left: 10px;
         }
         .input-group button:hover {
-            background-color: #2c7c1e;
+            background-color: #ff9900;
         }
         .error-message {
             color: red;
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-top: 10px;
+            display: none;
         }
-
     </style>
 </head>
 <body>
@@ -115,7 +86,6 @@
         <p class="intro-text">Enter your product key to download the software.</p>
 
         <div class="input-group">
-            <label for="product-key">Enter Product Key:</label>
             <input type="text" id="product-key" placeholder="Enter product key" />
         </div>
 
@@ -123,34 +93,23 @@
             <button onclick="validateKey()">Download</button>
         </div>
 
-        <p class="error-message" id="error-message" style="display: none;">Incorrect key. Please try again.</p>
+        <p class="error-message" id="error-message">Incorrect key. Please try again.</p>
     </div>
 
     <script>
-        // Correct keys
         const correctKeys = [
-            "RA46-DAKB-G2B4-JE6W",
-            "8YYE-ZY6C-B1Y4-RCWW",
-            "CF1Z-7ONY-GBD7-QF34",
-            "2TIC-FJ78-I80B-A6B6",
-            "VQ9I-1262-B8T7-O0HL",
-            "VKDC-4ORY-MY8I-5BZP",
-            "PV1K-MC5A-SQ06-9GP7",
-            "UJD6-DLXN-F9I5-ES05",
-            "6CIZ-M84Y-VTAB-0VOY",
-            "469R-C8WW-FRVY-Y3Z5",
-            "L1QR-4FW3-SATX-ZK6U",
-            "BE4H-RLW8-3MIS-R63J",
-            "Z3CH-JW90-Y63M-4J1I",
-            "MG8S-EH6X-RMNR-QGT2",
-            "SD9C-9XFT-K9ZO-2RRZ"
+            "RA46-DAKB-G2B4-JE6W", "8YYE-ZY6C-B1Y4-RCWW", "CF1Z-7ONY-GBD7-QF34",
+            "2TIC-FJ78-I80B-A6B6", "VQ9I-1262-B8T7-O0HL", "VKDC-4ORY-MY8I-5BZP",
+            "PV1K-MC5A-SQ06-9GP7", "UJD6-DLXN-F9I5-ES05", "6CIZ-M84Y-VTAB-0VOY",
+            "469R-C8WW-FRVY-Y3Z5", "L1QR-4FW3-SATX-ZK6U", "BE4H-RLW8-3MIS-R63J",
+            "Z3CH-JW90-Y63M-4J1I", "MG8S-EH6X-RMNR-QGT2", "SD9C-9XFT-K9ZO-2RRZ"
         ];
 
         function validateKey() {
             const inputKey = document.getElementById("product-key").value;
             const errorMessage = document.getElementById("error-message");
             if (correctKeys.includes(inputKey)) {
-                window.location.href = "download/fieldsimulator2025"; // Redirect to download page
+                window.location.href = "download/fieldsimulator2025";
             } else {
                 errorMessage.style.display = "block";
             }
