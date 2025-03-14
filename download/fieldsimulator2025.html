@@ -37,7 +37,7 @@
             overflow: hidden;
         }
 
-        /* Window title bar (without buttons) */
+        /* Window title bar */
         .title-bar {
             text-align: center;
             padding: 12px;
@@ -88,6 +88,7 @@
             color: white;
         }
 
+        /* Download Button */
         .button {
             display: block;
             background: #007AFF;
@@ -108,6 +109,28 @@
             background: #005EC9;
         }
 
+        /* Minimum Requirements Button */
+        .button-secondary {
+            display: block;
+            background: transparent;
+            color: #007AFF;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border: 2px solid #007AFF;
+            border-radius: 10px;
+            margin: 10px auto;
+            width: 90%;
+            transition: 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button-secondary:hover {
+            background: rgba(0, 122, 255, 0.1);
+        }
+
         .footer {
             font-size: 12px;
             color: #888;
@@ -117,47 +140,96 @@
         .hidden {
             display: none;
         }
+
+        /* Minimum Requirements Style */
+        .requirements {
+            text-align: left;
+            font-size: 14px;
+            color: #444;
+            padding: 10px 20px;
+        }
+
+        .requirements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requirements ul li {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
 
     <div class="window">
-        <!-- macOS title bar (without buttons) -->
+        <!-- macOS title bar -->
         <div class="title-bar">
-            Download
+            Field Simulator 2025
         </div>
 
-        <!-- macOS-style tab bar -->
-        <div class="tab-bar">
-            <div class="tab active" onclick="switchTab('windows')">Windows</div>
-            <div class="tab" onclick="switchTab('mac')">macOS</div>
+        <!-- Download Section (Default View) -->
+        <div id="downloadSection">
+            <!-- macOS-style tab bar -->
+            <div class="tab-bar">
+                <div class="tab active" onclick="switchTab('windows')">Windows</div>
+                <div class="tab" onclick="switchTab('mac')">macOS</div>
+            </div>
+
+            <!-- Download Section (Windows) -->
+            <div id="downloadWindows">
+                <h1>Field Simulator 2025 (Windows)</h1>
+                <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
+
+                <p>Version: 1.0.0.0 (ZIP File)</p>
+                <a href="FieldSimulator2025.zip" class="button">Download ZIP</a>
+
+                <p>Version: 1.0.0.0 (ISO File)</p>
+                <a href="FieldSimulator2025.iso" class="button">Download ISO</a>
+            </div>
+
+            <!-- Download Section (MacOS) -->
+            <div id="downloadMac" class="hidden">
+                <h1>Field Simulator 2025 (macOS)</h1>
+                <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
+
+                <p>Version: 1.0.0.0 (DMG File)</p>
+                <a href="FieldSimulator2025.dmg" class="button">Download DMG</a>
+            </div>
+
+            <button class="button-secondary" onclick="showRequirements()">View Minimum Requirements</button>
         </div>
 
-        <!-- Download Section (Windows) -->
-        <div id="downloadWindows">
-            <h1>Field Simulator 2025 (Windows)</h1>
-            <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
-
-            <p>Version: 1.0.0.0 (ZIP File)</p>
-            <a href="FieldSimulator2025.zip" class="button">Download ZIP</a>
-
-            <p>Version: 1.0.0.0 (ISO File)</p>
-            <a href="FieldSimulator2025.iso" class="button">Download ISO</a>
-        </div>
-
-        <!-- Download Section (MacOS) -->
-        <div id="downloadMac" class="hidden">
-            <h1>Field Simulator 2025 (macOS)</h1>
-            <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
-
-            <p>Version: 1.0.0.0 (DMG File)</p>
-            <a href="FieldSimulator2025.dmg" class="button">Download DMG</a>
+        <!-- Minimum Requirements Section (Hidden by Default) -->
+        <div id="requirementsSection" class="hidden">
+            <h1>Minimum Requirements</h1>
+            <div class="requirements">
+                <ul>
+                    <li><b>Operating System:</b> Windows Vista and later (32-bit or 64-bit)/macOS 10.0 (Cheetah or later)</li>
+                    <li><b>Processor:</b> Optional</li>
+                    <li><b>Memory:</b> 512 MB RAM or less</li>
+                    <li><b>Graphics:</b> Optional</li>
+                    <li><b>Storage:</b> Windows: A few MB free/macOS: A few KB free</li>
+                    <li><b>Required App:</b> Windows: Command Prompt/macOS: Terminal</li>
+                </ul>
+            </div>
+            <button class="button" onclick="showDownloads()">Go to Downloads</button>
         </div>
 
         <p class="footer">FarmCraft Software 2025</p>
     </div>
 
     <script>
+        function showDownloads() {
+            document.getElementById("requirementsSection").classList.add("hidden");
+            document.getElementById("downloadSection").classList.remove("hidden");
+        }
+
+        function showRequirements() {
+            document.getElementById("downloadSection").classList.add("hidden");
+            document.getElementById("requirementsSection").classList.remove("hidden");
+        }
+
         function switchTab(tab) {
             document.getElementById("downloadWindows").classList.add("hidden");
             document.getElementById("downloadMac").classList.add("hidden");
