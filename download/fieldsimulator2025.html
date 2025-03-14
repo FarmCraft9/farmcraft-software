@@ -4,90 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download - Field Simulator 2025</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* macOS Sequoia Light Background */
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #181818;
-            color: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
+            background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            text-align: center;
             flex-direction: column;
         }
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            margin-top: 40px;
+
+        /* macOS-style window */
+        .window {
+            width: 600px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Window title bar (without buttons) */
+        .title-bar {
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* macOS-style tab bar */
+        .tab-bar {
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 8px;
+            border-radius: 12px;
+            margin: 10px auto;
+            width: 250px;
+        }
+
         .tab {
-            background-color: #222222;
-            color: #f0f0f0;
-            padding: 12px 24px;
-            font-size: 1.2rem;
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            border: none;
-            border-radius: 10px; /* Rounded corners for all tabs */
-            margin-right: 10px;
-            transition: 0.3s;
+            text-align: center;
+            border-radius: 10px;
+            transition: 0.2s;
         }
-        .tab:hover {
-            background-color: #f4a261;
-        }
+
         .tab.active {
-            background-color: #f4a261;
+            background: #007AFF;
             color: white;
         }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            padding: 40px;
-            border-radius: 20px;
-            background: #222222;
-            transition: all 0.3s;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: none; /* Hide both sections by default */
-        }
-        .container.active {
-            display: block; /* Show active tab's container */
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #f4a261;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .version-text {
-            font-size: 1.2rem;
-            color: #b4b4b4;
-            margin-bottom: 5px;
-        }
-        .small-text {
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-        .description-text {
-            font-size: 1rem;
-            color: #b4b4b4;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
+
         .button {
             display: block;
-            background-color: #f4a261;
+            background: #007AFF;
             color: white;
             padding: 12px;
-            font-size: 1.2rem;
+            font-size: 14px;
             font-weight: 500;
             text-decoration: none;
             border-radius: 10px;
@@ -95,186 +101,75 @@
             width: 90%;
             transition: 0.3s;
             cursor: pointer;
-            border: none;
-        }
-        .button:hover {
-            background-color: #e76f51;
-            transform: translateY(-3px);
-        }
-        .footer-text {
-            font-size: 0.9rem;
-            color: #b4b4b4;
-            margin-top: 40px;
-        }
-        .requirements {
-            display: none;
-            text-align: left;
-        }
-        .requirements h2 {
-            font-size: 1.5rem;
-            color: #f4a261;
             text-align: center;
         }
-        .requirements h3 {
-            font-size: 1.2rem;
-            color: #f4a261;
-            margin-top: 15px;
+
+        .button:hover {
+            background: #005EC9;
         }
-        .requirements p {
-            font-size: 1rem;
-            color: #b4b4b4;
-            margin-left: 10px;
+
+        .footer {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
         }
-        /* Toggle Button */
-        .toggle-btn {
-            background-color: #4a4a4a;
-            margin-top: 20px;
-        }
-        .toggle-btn:hover {
-            background-color: #6a6a6a;
-        }
-        /* YouTube Icon */
-        .youtube-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            color: #f4a261;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .youtube-icon:hover {
-            color: #e76f51;
-            transform: scale(1.1);
-        }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .version-text {
-                font-size: 1rem;
-            }
-            .description-text {
-                font-size: 0.9rem;
-            }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- Tabs for Windows and Mac -->
-    <div class="tabs">
-        <button class="tab active" id="tabWindows" onclick="switchTab('windows')">Windows</button>
-        <button class="tab" id="tabMac" onclick="switchTab('mac')">MacOS</button>
-    </div>
-
-    <!-- Download Section (Windows) -->
-    <div class="container" id="downloadSectionWindows" class="active">
-        <h1>Field Simulator 2025 (Windows)</h1>
-        <p class="description-text">Field Simulator 2025 is a simple field and crop care simulation game. You can cultivate the field, sow it, and then harvest and sell the crops!</p>
-
-        <!-- Download ZIP -->
-        <p class="version-text">Version: 1.0.0.0 <span class="small-text">- ZIP File</span></p>
-        <a href="FieldSimulator2025.zip" class="button">Download (ZIP File)</a>
-
-        <!-- Download ISO -->
-        <p class="version-text">Version: 1.0.0.0 <span class="small-text">- ISO File</span></p>
-        <a href="FieldSimulator2025.iso" class="button">Download (ISO File)</a>
-
-        <p class="footer-text">FarmCraft Software 2025</p>
-
-        <!-- Minimum Requirements Section (Windows) -->
-        <div class="requirements" id="requirementsWindows">
-            <h2>Minimum Requirements</h2>
-
-            <h3>ZIP File:</h3>
-            <p>OS: Windows Vista or later 32-bit/64-bit)</p>
-            <p>Processor: 100 MHz or higher</p>
-            <p>Memory (RAM): 256 MB or more</p>
-            <p>Storage: 10 MB free</p>
-            <p>Graphics: None</p>
-            <p>Required App: Command Prompt</p>
-
-            <h3>ISO File:</h3>
-            <p>OS: Windows 8/10/11 32-bit/64-bit</p>
-            <p>Processor: 100 MHz or more</p>
-            <p>Memory: 256 MB or more</p>
-            <p>Storage: 10 MB free</p>
-            <p>Graphics: None</p>
-            <p>Required App: Command Prompt</p>
+    <div class="window">
+        <!-- macOS title bar (without buttons) -->
+        <div class="title-bar">
+            Download
         </div>
-    </div>
 
-    <!-- Download Section (MacOS) -->
-    <div class="container" id="downloadSectionMac">
-        <h1>Field Simulator 2025 (MacOS)</h1>
-        <p class="description-text">Field Simulator 2025 is a simple field and crop care simulation game. You can cultivate the field, sow it, and then harvest and sell the crops!</p>
-
-        <!-- Download DMG -->
-        <p class="version-text">Version: 1.0.0.0 <span class="small-text">- SH File</span></p>
-        <a href="FieldSimulator2025.dmg" class="button">Download (DMG File)</a>
-
-        <p class="footer-text">FarmCraft Software 2025</p>
-
-        <!-- Minimum Requirements Section (MacOS) -->
-        <div class="requirements" id="requirementsMac">
-            <h2>Minimum Requirements</h2>
-
-            <h3>DMG File:</h3>
-            <p>OS: MacOS (10.0 Cheetah or later)</p>
-            <p>Processor: Any Intel or Apple Silicon (M1/M2) processor</p>
-            <p>Memory: 512 MB or less</p>
-            <p>Storage: 10 MB free</p>
-            <p>Shell: Bash (preferred) or compatible shell (zsh users can run with bash script.sh)</p>
-            <p>Required App: Terminal</p>
-            <p>Permissions: Execution permission (chmod +x FieldSimulator2025.sh)</p>
+        <!-- macOS-style tab bar -->
+        <div class="tab-bar">
+            <div class="tab active" onclick="switchTab('windows')">Windows</div>
+            <div class="tab" onclick="switchTab('mac')">macOS</div>
         </div>
+
+        <!-- Download Section (Windows) -->
+        <div id="downloadWindows">
+            <h1>Field Simulator 2025 (Windows)</h1>
+            <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
+
+            <p>Version: 1.0.0.0 (ZIP File)</p>
+            <a href="FieldSimulator2025.zip" class="button">Download ZIP</a>
+
+            <p>Version: 1.0.0.0 (ISO File)</p>
+            <a href="FieldSimulator2025.iso" class="button">Download ISO</a>
+        </div>
+
+        <!-- Download Section (MacOS) -->
+        <div id="downloadMac" class="hidden">
+            <h1>Field Simulator 2025 (macOS)</h1>
+            <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
+
+            <p>Version: 1.0.0.0 (DMG File)</p>
+            <a href="FieldSimulator2025.dmg" class="button">Download DMG</a>
+        </div>
+
+        <p class="footer">FarmCraft Software 2025</p>
     </div>
-
-    <!-- Toggle Button -->
-    <button class="button toggle-btn" onclick="toggleSections()">Minimum Requirements</button>
-
-    <!-- YouTube Icon -->
-    <a href="http://youtube.com/channel/UCTR2V6oc5q0gzywQE3vE-LA" class="youtube-icon" target="_blank">
-        <i class="fab fa-youtube"></i>
-    </a>
 
     <script>
         function switchTab(tab) {
-            var windowsTab = document.getElementById('tabWindows');
-            var macTab = document.getElementById('tabMac');
-            var windowsContainer = document.getElementById('downloadSectionWindows');
-            var macContainer = document.getElementById('downloadSectionMac');
-            var requirementsWindows = document.getElementById('requirementsWindows');
-            var requirementsMac = document.getElementById('requirementsMac');
+            document.getElementById("downloadWindows").classList.add("hidden");
+            document.getElementById("downloadMac").classList.add("hidden");
 
-            // Switch between the tabs
-            if (tab === 'windows') {
-                windowsTab.classList.add('active');
-                macTab.classList.remove('active');
-                windowsContainer.classList.add('active');
-                macContainer.classList.remove('active');
-                requirementsWindows.classList.remove('hidden');
-                requirementsMac.classList.add('hidden');
-            } else if (tab === 'mac') {
-                macTab.classList.add('active');
-                windowsTab.classList.remove('active');
-                macContainer.classList.add('active');
-                windowsContainer.classList.remove('active');
-                requirementsMac.classList.remove('hidden');
-                requirementsWindows.classList.add('hidden');
-            }
-        }
+            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
 
-        function toggleSections() {
-            var requirementsWindows = document.getElementById('requirementsWindows');
-            var requirementsMac = document.getElementById('requirementsMac');
-            if (requirementsWindows.style.display === "none") {
-                requirementsWindows.style.display = "block";
-                requirementsMac.style.display = "none";
+            if (tab === "windows") {
+                document.getElementById("downloadWindows").classList.remove("hidden");
+                document.querySelectorAll(".tab")[0].classList.add("active");
             } else {
-                requirementsWindows.style.display = "none";
-                requirementsMac.style.display = "block";
+                document.getElementById("downloadMac").classList.remove("hidden");
+                document.querySelectorAll(".tab")[1].classList.add("active");
             }
         }
     </script>
