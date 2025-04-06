@@ -6,14 +6,12 @@
     <title>FarmCraft Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* macOS Sequoia Background */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
             background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
@@ -25,7 +23,6 @@
             position: relative;
         }
 
-        /* Feedback Button */
         .feedback-button {
             position: absolute;
             top: 20px;
@@ -45,7 +42,6 @@
             background: #005EC9;
         }
 
-        /* macOS-style window */
         .window {
             width: 500px;
             background: rgba(255, 255, 255, 0.75);
@@ -57,7 +53,6 @@
             position: relative;
         }
 
-        /* Window title bar */
         .title-bar {
             text-align: center;
             padding: 12px;
@@ -80,7 +75,6 @@
             margin-bottom: 20px;
         }
 
-        /* Input field */
         .input-group {
             display: flex;
             justify-content: center;
@@ -97,7 +91,6 @@
             outline: none;
         }
 
-        /* macOS-style button */
         .button {
             background: #007AFF;
             color: white;
@@ -115,7 +108,6 @@
             background: #005EC9;
         }
 
-        /* Error Message */
         .error-message {
             color: red;
             font-size: 12px;
@@ -123,7 +115,6 @@
             margin-top: 5px;
         }
 
-        /* Easter Egg Message */
         .easter-egg-message {
             display: none;
             font-size: 18px;
@@ -133,14 +124,12 @@
             animation: bounce 1s infinite;
         }
 
-        /* Animation for the Easter Egg */
         @keyframes bounce {
             0% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0); }
         }
 
-        /* Footer */
         .footer {
             font-size: 12px;
             color: #888;
@@ -150,11 +139,9 @@
 </head>
 <body>
 
-    <!-- Feedback Button -->
     <a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
 
     <div class="window">
-        <!-- macOS title bar -->
         <div class="title-bar">
             FarmCraft Software
         </div>
@@ -169,14 +156,12 @@
 
         <p class="error-message" id="error-message">Incorrect key. Please try again.</p>
 
-        <!-- Easter Egg Message -->
         <p class="easter-egg-message" id="easter-egg-message">You found an Easter Egg!! 🎉</p>
 
         <p class="footer">FarmCraft Software 2025</p>
     </div>
 
     <script>
-        // Correct keys
         const correctKeys = [
             "RA46-DAKB-G2B4-JE6W",
             "8YYE-ZY6C-B1Y4-RCWW",
@@ -200,13 +185,12 @@
             const errorMessage = document.getElementById("error-message");
             const easterEggMessage = document.getElementById("easter-egg-message");
 
-            // Check if the input is the Easter Egg keyword
             if (inputKey.toUpperCase() === "FARMCRAFTSOFTWARE") {
-                easterEggMessage.style.display = "block"; // Show the Easter Egg message
+                easterEggMessage.style.display = "block";
             } else if (correctKeys.includes(inputKey)) {
-                window.location.href = "download/fieldsimulator2025"; // Redirect to download page
+                window.location.href = "download/fieldsimulator2025";
             } else {
-                errorMessage.style.display = "block"; // Show error message
+                errorMessage.style.display = "block";
             }
         }
     </script>
