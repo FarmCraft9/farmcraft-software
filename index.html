@@ -22,6 +22,27 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            position: relative;
+        }
+
+        /* Feedback Button */
+        .feedback-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #007AFF;
+            color: white;
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            z-index: 1000;
+        }
+
+        .feedback-button:hover {
+            background: #005EC9;
         }
 
         /* macOS-style window */
@@ -36,7 +57,7 @@
             position: relative;
         }
 
-        /* Window title bar (without buttons) */
+        /* Window title bar */
         .title-bar {
             text-align: center;
             padding: 12px;
@@ -111,6 +132,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Feedback Button -->
+    <a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
 
     <div class="window">
         <!-- macOS title bar -->
