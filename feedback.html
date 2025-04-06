@@ -7,8 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        // Initialize EmailJS with your public key
-        emailjs.init("p1dOYucs1hUUhalhE"); // Replace with your actual Public Key
+        emailjs.init("p1dOYucs1hUUhalhE");
     </script>
     <style>
         * {
@@ -25,7 +24,7 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
-            color: black; /* Changed text color to black */
+            color: black;
         }
 
         .window {
@@ -47,19 +46,19 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             font-weight: 500;
-            color: black; /* Changed text color to black */
+            color: black;
         }
 
         h1 {
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: black; /* Changed text color to black */
+            color: black;
         }
 
         p {
             font-size: 14px;
-            color: black; /* Changed text color to black */
+            color: black;
             margin-bottom: 20px;
         }
 
@@ -96,7 +95,7 @@
 
         .footer {
             font-size: 12px;
-            color: black; /* Changed text color to black */
+            color: black;
             margin-top: 10px;
         }
     </style>
@@ -109,7 +108,6 @@
         </div>
 
         <div id="formContent">
-            <!-- Form for reporting bugs or submitting ideas -->
             <div>
                 <label for="report-type">Choose Type:</label>
                 <select id="report-type">
@@ -142,14 +140,12 @@
     </div>
 
     <script>
-        // Function to handle the submission
         function sendEmail() {
             var userEmail = document.getElementById("user-email").value;
             var title = document.getElementById("title").value;
             var description = document.getElementById("description").value;
             var reportType = document.getElementById("report-type").value;
 
-            // Check if all fields are filled
             if (!userEmail || !title || !description) {
                 document.getElementById("error-message").style.display = "block";
                 return;
@@ -157,7 +153,6 @@
                 document.getElementById("error-message").style.display = "none";
             }
 
-            // Prepare the email template parameters
             var templateParams = {
                 user_email: userEmail,
                 title: title,
@@ -165,11 +160,10 @@
                 report_type: reportType
             };
 
-            // Send the email using EmailJS
             emailjs.send("service_p89ekhv", "template_xa4a6um", templateParams)
                 .then(function(response) {
                     alert("Your report/idea has been submitted successfully!");
-                    document.getElementById("formContent").reset();  // Reset the form after submission
+                    document.getElementById("formContent").reset();
                 }, function(error) {
                     alert("Error: " + JSON.stringify(error));
                 });
