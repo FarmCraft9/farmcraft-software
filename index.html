@@ -233,7 +233,6 @@ function validateKey() {
     if (inputKey.toUpperCase() === "FARMCRAFTSOFTWARE") {
         easterEggMessage.style.display = "block";
     } else if (correctKeys.includes(inputKey)) {
-        sendWebhook(inputKey);
         loadingScreen.style.display = "flex";
 
         setTimeout(() => {
@@ -244,6 +243,7 @@ function validateKey() {
     }
 }
 </script>
+
 
 </body>
 </html>
