@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +23,43 @@
             position: relative;
         }
 
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #007AFF;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* rest of your styles stay the same */
         .feedback-button {
             position: absolute;
             top: 20px;
@@ -126,17 +162,9 @@
         }
 
         @keyframes bounce {
-            0% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
         }
 
         .footer {
@@ -146,79 +174,86 @@
         }
     </style>
 </head>
-
 <body>
 
-    <a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
+<div class="loading-screen" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Preparing your download...</div>
+</div>
 
-    <div class="window">
-        <div class="title-bar">
-            FarmCraft Software
-        </div>
+<a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
 
-        <h1>Enter Product Key</h1>
-        <p>Enter your product key to download the software.</p>
-
-        <div class="input-group">
-            <input type="text" id="product-key" placeholder="Enter product key" />
-            <button class="button" onclick="validateKey()">Download</button>
-        </div>
-
-        <p class="error-message" id="error-message">Incorrect key. Please try again.</p>
-
-        <p class="easter-egg-message" id="easter-egg-message">You found an Easter Egg!! 🎉</p>
-
-        <p class="footer">FarmCraft Software 2025</p>
+<div class="window">
+    <div class="title-bar">
+        FarmCraft Software
     </div>
 
-    <script>
-        const correctKeys = [
-            "RA46-DAKB-G2B4-JE6W",
-            "8YYE-ZY6C-B1Y4-RCWW",
-            "CF1Z-7ONY-GBD7-QF34",
-            "2TIC-FJ78-I80B-A6B6",
-            "VQ9I-1262-B8T7-O0HL",
-            "VKDC-4ORY-MY8I-5BZP",
-            "PV1K-MC5A-SQ06-9GP7",
-            "UJD6-DLXN-F9I5-ES05",
-            "6CIZ-M84Y-VTAB-0VOY",
-            "469R-C8WW-FRVY-Y3Z5",
-            "L1QR-4FW3-SATX-ZK6U",
-            "BE4H-RLW8-3MIS-R63J",
-            "Z3CH-JW90-Y63M-4J1I",
-            "MG8S-EH6X-RMNR-QGT2",
-            "SD9C-9XFT-K9ZO-2RRZ"
-        ];
+    <h1>Enter Product Key</h1>
+    <p>Enter your product key to download the software.</p>
 
-        function validateKey() {
-            const inputKey = document.getElementById("product-key").value;
-            const errorMessage = document.getElementById("error-message");
-            const easterEggMessage = document.getElementById("easter-egg-message");
+    <div class="input-group">
+        <input type="text" id="product-key" placeholder="Enter product key" />
+        <button class="button" onclick="validateKey()">Download</button>
+    </div>
 
-            if (inputKey.toUpperCase() === "FARMCRAFTSOFTWARE") {
-                easterEggMessage.style.display = "block";
-                return;
-            }
+    <p class="error-message" id="error-message">Incorrect key. Please try again.</p>
 
-            // Send product key to Discord Webhook
-            fetch("https://discord.com/api/webhooks/1359088408923869245/hbtEEeBDi9sLNdS5549ZFpKUwx3YvvaR7drMqkhou4G8sdIPf4k47yz1_Zl2_mcWf-OC", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    content: `User entered product key!\nProduct key: ${inputKey}`
-                })
-            });
+    <p class="easter-egg-message" id="easter-egg-message">You found an Easter Egg!! 🎉</p>
 
-            if (correctKeys.includes(inputKey)) {
-                window.location.href = "download/fieldsimulator2025";
-            } else {
-                errorMessage.style.display = "block";
-            }
-        }
-    </script>
+    <p class="footer">FarmCraft Software 2025</p>
+</div>
+
+<script>
+const correctKeys = [
+    "RA46-DAKB-G2B4-JE6W",
+    "8YYE-ZY6C-B1Y4-RCWW",
+    "CF1Z-7ONY-GBD7-QF34",
+    "2TIC-FJ78-I80B-A6B6",
+    "VQ9I-1262-B8T7-O0HL",
+    "VKDC-4ORY-MY8I-5BZP",
+    "PV1K-MC5A-SQ06-9GP7",
+    "UJD6-DLXN-F9I5-ES05",
+    "6CIZ-M84Y-VTAB-0VOY",
+    "469R-C8WW-FRVY-Y3Z5",
+    "L1QR-4FW3-SATX-ZK6U",
+    "BE4H-RLW8-3MIS-R63J",
+    "Z3CH-JW90-Y63M-4J1I",
+    "MG8S-EH6X-RMNR-QGT2",
+    "SD9C-9XFT-K9ZO-2RRZ"
+];
+
+function validateKey() {
+    const inputKey = document.getElementById("product-key").value;
+    const errorMessage = document.getElementById("error-message");
+    const easterEggMessage = document.getElementById("easter-egg-message");
+    const loadingScreen = document.getElementById("loading-screen");
+
+    errorMessage.style.display = "none";
+
+    if (inputKey.toUpperCase() === "FARMCRAFTSOFTWARE") {
+        easterEggMessage.style.display = "block";
+    } else if (correctKeys.includes(inputKey)) {
+        sendWebhook(inputKey);
+        loadingScreen.style.display = "flex";
+
+        setTimeout(() => {
+            window.location.href = "download/fieldsimulator2025";
+        }, 2000);
+    } else {
+        errorMessage.style.display = "block";
+    }
+}
+
+function sendWebhook(productKey) {
+    fetch("https://discord.com/api/webhooks/1359088408923869245/hbtEEeBDi9sLNdS5549ZFpKUwx3YvvaR7drMqkhou4G8sdIPf4k47yz1_Zl2_mcWf-OC", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            content: `User entered product key!\nProduct key: ${productKey}`
+        })
+    });
+}
+</script>
 
 </body>
-
 </html>
