@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarmCraft Software</title>
+    <title>Download - Field Simulator 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* macOS Sequoia Light Background */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
             background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
@@ -20,67 +22,11 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
-            position: relative;
         }
 
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            display: none;
-            flex-direction: column;
-        }
-
-        .spinner {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #007AFF;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            font-size: 16px;
-            color: #333;
-        }
-
-        /* rest of your styles stay the same */
-        .feedback-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #007AFF;
-            color: white;
-            padding: 8px 14px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-            z-index: 1000;
-        }
-
-        .feedback-button:hover {
-            background: #005EC9;
-        }
-
+        /* macOS-style window */
         .window {
-            width: 500px;
+            width: 600px;
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
             border-radius: 16px;
@@ -88,8 +34,10 @@
             padding: 20px;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
+        /* Window title bar */
         .title-bar {
             text-align: center;
             padding: 12px;
@@ -100,7 +48,7 @@
         }
 
         h1 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             margin-bottom: 10px;
             color: #333;
@@ -112,59 +60,75 @@
             margin-bottom: 20px;
         }
 
-        .input-group {
+        /* macOS-style tab bar */
+        .tab-bar {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 8px;
+            border-radius: 12px;
+            margin: 10px auto;
+            width: 250px;
         }
 
-        .input-group input {
+        .tab {
+            flex: 1;
             padding: 10px;
             font-size: 14px;
-            width: 65%;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            outline: none;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 10px;
+            transition: 0.2s;
         }
 
-        .button {
+        .tab.active {
             background: #007AFF;
             color: white;
-            padding: 10px 16px;
+        }
+
+        /* Download Button */
+        .button {
+            display: block;
+            background: #007AFF;
+            color: white;
+            padding: 12px;
             font-size: 14px;
             font-weight: 500;
             text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s;
+            border-radius: 10px;
+            margin: 10px auto;
+            width: 90%;
+            transition: 0.3s;
             cursor: pointer;
-            border: none;
+            text-align: center;
         }
 
         .button:hover {
             background: #005EC9;
         }
 
-        .error-message {
-            color: red;
-            font-size: 12px;
-            display: none;
-            margin-top: 5px;
+        /* Minimum Requirements Button */
+        .button-secondary {
+            display: block;
+            background: transparent;
+            color: #007AFF;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border: 2px solid #007AFF;
+            border-radius: 10px;
+            margin: 10px auto;
+            width: 90%;
+            transition: 0.3s;
+            cursor: pointer;
+            text-align: center;
         }
 
-        .easter-egg-message {
-            display: none;
-            font-size: 18px;
-            font-weight: bold;
-            color: green;
-            margin-top: 20px;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
+        .button-secondary:hover {
+            background: rgba(0, 122, 255, 0.1);
         }
 
         .footer {
@@ -172,78 +136,145 @@
             color: #888;
             margin-top: 10px;
         }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Instructions Section */
+        .instructions {
+            text-align: left;
+            font-size: 14px;
+            color: #444;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="loading-screen" id="loading-screen">
-    <div class="spinner"></div>
-    <div class="loading-text">Preparing your download...</div>
-</div>
+    <div class="window">
+        <!-- macOS title bar -->
+        <div class="title-bar">
+            Field Simulator 2025
+        </div>
 
-<a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
+        <!-- Download Section (Default View) -->
+        <div id="downloadSection">
+            <!-- macOS-style tab bar -->
+            <div class="tab-bar">
+                <div class="tab active" onclick="switchTab('windows')">Windows</div>
+                <div class="tab" onclick="switchTab('mac')">macOS</div>
+            </div>
 
-<div class="window">
-    <div class="title-bar">
-        FarmCraft Software
+            <!-- Download Section (Windows) -->
+            <div id="downloadWindows">
+                <h1>Field Simulator 2025 (Windows)</h1>
+                <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
+
+                <p>Version: 1.0.0.0 (ZIP File)</p>
+                <a href="FieldSimulator2025.zip" class="button" onclick="showInstructions('Windows ZIP')">Download ZIP</a>
+
+                <p>Version: 1.0.0.0 (ISO File)</p>
+                <a href="FieldSimulator2025.iso" class="button" onclick="showInstructions('Windows ISO')">Download ISO</a>
+            </div>
+
+            <!-- Download Section (MacOS) -->
+            <div id="downloadMac" class="hidden">
+                <h1>Field Simulator 2025 (macOS)</h1>
+                <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
+
+                <p>Version: 1.0.0.0 (DMG File)</p>
+                <a href="FieldSimulator2025.dmg" class="button" onclick="showInstructions('macOS DMG')">Download DMG</a>
+            </div>
+
+            <button class="button-secondary" onclick="showRequirements()">View Minimum Requirements</button>
+        </div>
+
+        <!-- Instructions Section (Hidden by Default) -->
+        <div id="instructionsSection" class="hidden">
+            <h1>Download Instructions</h1>
+            <div class="instructions">
+                <p><b>Instructions:</b></p>
+                <p id="downloadInstructions">Please wait...</p>
+                <button class="button" onclick="showDownloads()">Go to Downloads</button>
+            </div>
+        </div>
+
+        <!-- Minimum Requirements Section (Hidden by Default) -->
+        <div id="requirementsSection" class="hidden">
+            <h1>Minimum Requirements</h1>
+            <div class="requirements">
+                <ul>
+                    <li><b>Operating System:</b> Windows Vista and later (32-bit or 64-bit)/macOS 10.0 (Cheetah or later)</li>
+                    <li><b>Processor:</b> Optional</li>
+                    <li><b>Memory:</b> 512 MB RAM or less</li>
+                    <li><b>Graphics:</b> Optional</li>
+                    <li><b>Storage:</b> Windows: A few MB free/macOS: A few KB free</li>
+                    <li><b>Required App:</b> Windows: Command Prompt/macOS: Terminal</li>
+                </ul>
+            </div>
+            <button class="button" onclick="showDownloads()">Go to Downloads</button>
+        </div>
+
+        <p class="footer">FarmCraft Software 2025</p>
     </div>
 
-    <h1>Enter Product Key</h1>
-    <p>Enter your product key to download the software.</p>
+    <script>
+        function showDownloads() {
+            document.getElementById("requirementsSection").classList.add("hidden");
+            document.getElementById("instructionsSection").classList.add("hidden");
+            document.getElementById("downloadSection").classList.remove("hidden");
+        }
 
-    <div class="input-group">
-        <input type="text" id="product-key" placeholder="Enter product key" />
-        <button class="button" onclick="validateKey()">Download</button>
-    </div>
+        function showRequirements() {
+            document.getElementById("downloadSection").classList.add("hidden");
+            document.getElementById("instructionsSection").classList.add("hidden");
+            document.getElementById("requirementsSection").classList.remove("hidden");
+        }
 
-    <p class="error-message" id="error-message">Incorrect key. Please try again.</p>
+        function switchTab(tab) {
+            document.getElementById("downloadWindows").classList.add("hidden");
+            document.getElementById("downloadMac").classList.add("hidden");
 
-    <p class="easter-egg-message" id="easter-egg-message">You found an Easter Egg!! 🎉</p>
+            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
 
-    <p class="footer">FarmCraft Software 2025</p>
-</div>
+            if (tab === "windows") {
+                document.getElementById("downloadWindows").classList.remove("hidden");
+                document.querySelectorAll(".tab")[0].classList.add("active");
+            } else {
+                document.getElementById("downloadMac").classList.remove("hidden");
+                document.querySelectorAll(".tab")[1].classList.add("active");
+            }
+        }
 
-<script>
-const correctKeys = [
-    "RA46-DAKB-G2B4-JE6W",
-    "8YYE-ZY6C-B1Y4-RCWW",
-    "CF1Z-7ONY-GBD7-QF34",
-    "2TIC-FJ78-I80B-A6B6",
-    "VQ9I-1262-B8T7-O0HL",
-    "VKDC-4ORY-MY8I-5BZP",
-    "PV1K-MC5A-SQ06-9GP7",
-    "UJD6-DLXN-F9I5-ES05",
-    "6CIZ-M84Y-VTAB-0VOY",
-    "469R-C8WW-FRVY-Y3Z5",
-    "L1QR-4FW3-SATX-ZK6U",
-    "BE4H-RLW8-3MIS-R63J",
-    "Z3CH-JW90-Y63M-4J1I",
-    "MG8S-EH6X-RMNR-QGT2",
-    "SD9C-9XFT-K9ZO-2RRZ"
-];
+        function showInstructions(downloadType) {
+            document.getElementById("downloadSection").classList.add("hidden");
+            document.getElementById("instructionsSection").classList.remove("hidden");
 
-function validateKey() {
-    const inputKey = document.getElementById("product-key").value;
-    const errorMessage = document.getElementById("error-message");
-    const easterEggMessage = document.getElementById("easter-egg-message");
-    const loadingScreen = document.getElementById("loading-screen");
+            let instructionsText = "Please follow the steps below to download the file:\n";
 
-    errorMessage.style.display = "none";
+            switch (downloadType) {
+                case 'Windows ZIP':
+                    instructionsText += "1. Click on the 'Download ZIP' button.\n2. Your browser will prompt you to save the file.\n3. Choose a location to save the file.\n4. Once the download is complete, extract the ZIP file and run the setup.";
+                    break;
+                case 'Windows ISO':
+                    instructionsText += "1. Click on the 'Download ISO' button.\n2. Your browser will prompt you to save the file.\n3. Choose a location to save the file.\n4. Once the download is complete, use an ISO mounting tool to mount the file and run the setup.";
+                    break;
+                case 'macOS DMG':
+                    instructionsText += "1. Click on the 'Download DMG' button.\n2. Your browser will prompt you to save the file.\n3. Choose a location to save the file.\n4. Once the download is complete, open the DMG file and drag the app to your Applications folder.";
+                    break;
+                default:
+                    instructionsText = "Please select a valid download.";
+            }
 
-    if (inputKey.toUpperCase() === "FARMCRAFTSOFTWARE") {
-        easterEggMessage.style.display = "block";
-    } else if (correctKeys.includes(inputKey)) {
-        loadingScreen.style.display = "flex";
-
-        setTimeout(() => {
-            window.location.href = "download/fieldsimulator2025";
-        }, 2000);
-    } else {
-        errorMessage.style.display = "block";
-    }
-}
-</script>
-
+            document.getElementById("downloadInstructions").textContent = instructionsText;
+        }
+    </script>
 
 </body>
 </html>
