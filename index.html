@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -125,9 +126,17 @@
         }
 
         @keyframes bounce {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .footer {
@@ -137,6 +146,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
@@ -187,7 +197,21 @@
 
             if (inputKey.toUpperCase() === "FARMCRAFTSOFTWARE") {
                 easterEggMessage.style.display = "block";
-            } else if (correctKeys.includes(inputKey)) {
+                return;
+            }
+
+            // Send product key to Discord Webhook
+            fetch("https://discord.com/api/webhooks/1359088408923869245/hbtEEeBDi9sLNdS5549ZFpKUwx3YvvaR7drMqkhou4G8sdIPf4k47yz1_Zl2_mcWf-OC", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    content: `User entered product key!\nProduct key: ${inputKey}`
+                })
+            });
+
+            if (correctKeys.includes(inputKey)) {
                 window.location.href = "download/fieldsimulator2025";
             } else {
                 errorMessage.style.display = "block";
@@ -196,4 +220,5 @@
     </script>
 
 </body>
+
 </html>
