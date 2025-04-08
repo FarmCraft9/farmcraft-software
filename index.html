@@ -55,26 +55,23 @@ input, button {
 </div>
 
 <script>
-// Obfuscated keys (base64)
-const encodedKeys = [
-  "UkE0Ni1EQUtCLUcyQjQtSkU2Vw==",
-  "OFFZRS1aWTZDLUIxWTQtUkNXVw==",
-  "Q0YxWi03T05ZLUdCRDctUUYzNA==",
-  "MlRJQy1GSjc4LUk4MEItQTZCNg==",
-  "VlE5SS0xMjYyLUI4VDctTzBITA==",
-  "VktEQy00T1JZLU1ZOEktNUJaUA==",
-  "UFYxSy1NQzVBLVNRTzYtOUdQNw==",
-  "VUpENi1ETFhOLUY5STUtRVMwNQ==",
-  "NkNJWi1MODRZLVZUQUItMFZPWQ==",
-  "NDY5Ui1DOFdXLUZSVlktWTNaNQ==",
-  "TDFRUi00RlczLVNBVFgtWks2VQ==",
-  "QkU0SC1STFc4LTNNSVMtUjYzSg==",
-  "WjNDSC1KVzkwLVk2M00tNEoxSQ==",
-  "TUc4Uy1FSDZYLVJNTlItUUdUMg==",
-  "U0Q5Qy05WEZULUs5Wk8tMlJSWg=="
+const correctKeys = [
+  "RA46-DAKB-G2B4-JE6W",
+  "OFFYE-ZY6C-B1Y4-RCWV",
+  "CF1Z-7ONY-GBD7-QF34",
+  "2TIC-FJ78-I80B-A6B6",
+  "VQ9I-1262-B8T7-OBHL",
+  "VKDC-4ORY-MY8I-5BZP",
+  "PV1K-MC5A-SQO6-9GP7",
+  "UJD6-DLXN-F9I5-ES05",
+  "6CIZ-M84Y-VTABI-0VOY",
+  "469R-C8WW-FRVY-Y3Z5",
+  "L1QR-4FW3-SATX-ZK6U",
+  "BE4H-RLW8-3MIS-R63J",
+  "Z3CH-JW90-Y63M-4J1I",
+  "MG8S-EH6X-RMNR-QGT2",
+  "SD9C-9XFT-K9ZO-2RJZ"
 ];
-
-const correctKeys = encodedKeys.map(k => atob(k));
 
 function validateKey() {
     const inputKey = document.getElementById("product-key").value.trim().toUpperCase();
