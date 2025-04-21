@@ -1,6 +1,6 @@
 # FarmCraft Software
 
-## **Do _NOT_ look at the page's source code. It's not allowed! This is very important.**
+## **Do _NOT_ look at the page's source code. This is very important.**
 
 Welcome to FarmCraft Software! You can download Field Simulator 2025 here, and submit feedback!
 
@@ -12,7 +12,7 @@ Field Simulator 2025 is a simple field and crop care simulation game.
 
 For Windows, it's written in batch. For macOS, it's written in bash, but AppleScript is coming soon!
 
-> Where do i get product keys?
+> Where do I get product keys?
 
 Ask for product keys on farmcraft.software@gmail.com or on my YouTube channel.
 
