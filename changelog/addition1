@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmCraft Software - Changelog Addition 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
+            background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .changelog-window {
+            width: 500px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .title-bar {
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .changelog-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .changelog-list li {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .download-button {
+            background: #007AFF;
+            color: white;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .download-button:hover {
+            background: #005EC9;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="changelog-window">
+    <div class="title-bar">
+        FarmCraft Software - Changelog Addition 1
+    </div>
+
+    <h1>Patch Notes - Addition 1</h1>
+    <p>Changes:</p>
+
+    <ul class="changelog-list">
+        <li>Added brand new installer for Field Simulator 2025 (EXE)</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <a href="https://farmcraft9.github.io/farmcraft-software/" class="download-button">Download</a>
+
+    <p class="footer">FarmCraft Software 2025</p>
+</div>
+
+</body>
+</html>
