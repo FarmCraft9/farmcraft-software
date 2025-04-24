@@ -1,8 +1,0 @@
-New update is available for Field Simulator 2025!
-Release date: 8 April 2025
-Changelog:
-Added tractors
-Added Combines
-Fixed bugs
-
-FarmCraft Software 2025
