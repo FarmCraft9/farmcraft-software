@@ -1,231 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download - Field Simulator 2025</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
-            background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-        .window {
-            width: 600px;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .title-bar {
-            text-align: center;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            font-weight: 500;
-        }
-        h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        p {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 20px;
-        }
-        .tab-bar {
-            display: flex;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 8px;
-            border-radius: 12px;
-            margin: 10px auto;
-            width: 250px;
-        }
-        .tab {
-            flex: 1;
-            padding: 10px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            text-align: center;
-            border-radius: 10px;
-            transition: 0.2s;
-        }
-        .tab.active {
-            background: #007AFF;
-            color: white;
-        }
-        .button {
-            display: block;
-            background: #007AFF;
-            color: white;
-            padding: 12px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            border-radius: 10px;
-            margin: 10px auto;
-            width: 90%;
-            transition: 0.3s;
-            cursor: pointer;
-            text-align: center;
-        }
-        .button:hover {
-            background: #005EC9;
-        }
-        .button-secondary {
-            display: block;
-            background: transparent;
-            color: #007AFF;
-            padding: 10px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            border: 2px solid #007AFF;
-            border-radius: 10px;
-            margin: 10px auto;
-            width: 90%;
-            transition: 0.3s;
-            cursor: pointer;
-            text-align: center;
-        }
-        .button-secondary:hover {
-            background: rgba(0, 122, 255, 0.1);
-        }
-        .footer {
-            font-size: 12px;
-            color: #888;
-            margin-top: 10px;
-        }
-        .hidden {
-            display: none;
-        }
-        .instructions {
-            text-align: left;
-            font-size: 14px;
-            color: #444;
-            padding: 10px 20px;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download - Field Simulator 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
+      background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+    .window {
+      width: 600px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .title-bar {
+      text-align: center;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .button {
+      display: block;
+      background: #007AFF;
+      color: white;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 10px;
+      margin: 10px auto 5px;
+      width: 90%;
+      transition: 0.3s;
+      cursor: pointer;
+      text-align: center;
+      border: none;
+    }
+    .button:hover {
+      background: #005EC9;
+    }
+    .small-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #007AFF;
+      color: white;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .small-button:hover {
+      background: #005EC9;
+    }
+    .other-os-link {
+      color: #007AFF;
+      font-size: 14px;
+      margin-top: 8px;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .other-os-list {
+      margin-top: 10px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .other-os-list.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .other-os-button {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      color: #007AFF;
+      border: 2px solid #007AFF;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      width: 90%;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .other-os-button:hover {
+      background: rgba(0, 122, 255, 0.15);
+    }
+    .footer {
+      font-size: 12px;
+      color: #888;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div class="window">
-        <div class="title-bar">
-            Field Simulator 2025
-        </div>
-        <div id="downloadSection">
-            <div class="tab-bar">
-                <div class="tab active" onclick="switchTab('windows')">Windows</div>
-                <div class="tab" onclick="switchTab('mac')">macOS</div>
-            </div>
-            <div id="downloadWindows">
-                <h1>Field Simulator 2025 (Windows)</h1>
-                <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
-                <p>Version: 1.0.1.0 (EXE File)</p>
-                <a href="FieldSimulator2025Patch1.0.2.0.exe" class="button" onclick="showInstructions('Windows EXE')">Download EXE</a>
-            </div>
-            <div id="downloadMac" class="hidden">
-                <h1>Field Simulator 2025 (macOS)</h1>
-                <p>Field Simulator 2025 is a simple field and crop care simulation game.</p>
-                <p>Version: 1.0.0.0 (DMG File)</p>
-                <a href="FieldSimulator2025.dmg" class="button" onclick="showInstructions('macOS DMG')">Download DMG</a>
-            </div>
-            <button class="button-secondary" onclick="showRequirements()">View Minimum Requirements</button>
-        </div>
-        <div id="instructionsSection" class="hidden">
-            <h1>Download Instructions</h1>
-            <div class="instructions">
-                <p><b>Instructions:</b></p>
-                <p id="downloadInstructions">Please wait...</p>
-                <button class="button" onclick="showDownloads()">Go to Downloads</button>
-            </div>
-        </div>
-        <div id="requirementsSection" class="hidden">
-            <h1>Minimum Requirements</h1>
-            <div class="requirements">
-                <ul>
-                    <li><b>Operating System:</b> Windows Vista or later (32-bit or 64-bit)/macOS 10.0 (Cheetah or later)</li>
-                    <li><b>Processor:</b> Optional</li>
-                    <li><b>Memory:</b> 128 MB RAM or more</li>
-                    <li><b>Graphics:</b> Optional</li>
-                    <li><b>Storage:</b> Windows: A few MB free/macOS: A few KB free</li>
-                    <li><b>Required App:</b> Windows: Command Prompt/macOS: Terminal</li>
-                </ul>
-            </div>
-            <button class="button" onclick="showDownloads()">Go to Downloads</button>
-        </div>
-        <p class="footer">FarmCraft Software 2025</p>
+  <button class="small-button" onclick="showRequirements()">Minimum Requirements</button>
+
+  <div class="window">
+    <div class="title-bar">Field Simulator 2025</div>
+    <div id="downloadContent">
+      <h1 id="downloadTitle">Loading...</h1>
+      <p id="downloadDescription">Please wait while we detect your OS.</p>
+      <a id="downloadButton" href="#" class="button">Download</a>
+      <div>
+        <span class="other-os-link" onclick="toggleOtherOS()">Other OS</span>
+      </div>
+      <div id="otherOSList" class="other-os-list">
+        <button class="other-os-button" onclick="selectOS('windows')">Windows</button>
+        <button class="other-os-button" onclick="selectOS('mac')">macOS</button>
+      </div>
     </div>
-    <script>
-        function showDownloads() {
-            document.getElementById("requirementsSection").classList.add("hidden");
-            document.getElementById("instructionsSection").classList.add("hidden");
-            document.getElementById("downloadSection").classList.remove("hidden");
-        }
 
-        function showRequirements() {
-            document.getElementById("downloadSection").classList.add("hidden");
-            document.getElementById("instructionsSection").classList.add("hidden");
-            document.getElementById("requirementsSection").classList.remove("hidden");
-        }
+    <div id="requirementsSection" style="display: none;">
+      <h1>Minimum Requirements</h1>
+      <ul style="text-align: left; margin-top: 10px;">
+        <li><b>Operating System:</b> Windows Vista or later / macOS 10.0 or later</li>
+        <li><b>Processor:</b> Optional</li>
+        <li><b>Memory:</b> 128 MB RAM or more</li>
+        <li><b>Graphics:</b> Optional</li>
+        <li><b>Storage:</b> Windows: A few MB / macOS: A few KB</li>
+        <li><b>Required App:</b> Command Prompt (Windows) or Terminal (macOS)</li>
+      </ul>
+      <button class="button" style="margin-top: 15px;" onclick="showDownloads()">Go to Downloads</button>
+    </div>
 
-        function switchTab(tab) {
-            document.getElementById("downloadWindows").classList.add("hidden");
-            document.getElementById("downloadMac").classList.add("hidden");
+    <p class="footer">FarmCraft Software 2025</p>
+  </div>
 
-            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  <script>
+    function detectOS() {
+      const platform = navigator.platform.toLowerCase();
+      if (platform.includes('win')) {
+        selectOS('windows');
+      } else if (platform.includes('mac')) {
+        selectOS('mac');
+      } else {
+        document.getElementById("downloadTitle").textContent = "Unsupported OS";
+        document.getElementById("downloadDescription").textContent = "Your operating system is not officially supported, but you can still download for Windows or macOS below.";
+        document.getElementById("downloadButton").href = "#";
+        document.getElementById("downloadButton").textContent = "No Download Available";
+      }
+    }
 
-            if (tab === "windows") {
-                document.getElementById("downloadWindows").classList.remove("hidden");
-                document.querySelectorAll(".tab")[0].classList.add("active");
-            } else {
-                document.getElementById("downloadMac").classList.remove("hidden");
-                document.querySelectorAll(".tab")[1].classList.add("active");
-            }
-        }
+    function selectOS(os) {
+      if (os === 'windows') {
+        document.getElementById("downloadTitle").textContent = "Field Simulator 2025 (Windows)";
+        document.getElementById("downloadDescription").textContent = "Version 1.0.1.0 (EXE File)";
+        document.getElementById("downloadButton").href = "FieldSimulator2025Patch1.0.2.0.exe";
+        document.getElementById("downloadButton").textContent = "Download EXE";
+        document.getElementById("downloadButton").style.display = "block";
+        document.getElementById("downloadTitle").style.display = "block";
+        document.getElementById("downloadDescription").style.display = "block";
+      } else if (os === 'mac') {
+        document.getElementById("downloadTitle").textContent = "Field Simulator 2025 (macOS)";
+        document.getElementById("downloadDescription").textContent = "Version 1.0.0.0 (DMG File)";
+        document.getElementById("downloadButton").href = "FieldSimulator2025.dmg";
+        document.getElementById("downloadButton").textContent = "Download DMG";
+        document.getElementById("downloadButton").style.display = "block";
+        document.getElementById("downloadTitle").style.display = "block";
+        document.getElementById("downloadDescription").style.display = "block";
+      }
+      document.getElementById("otherOSList").classList.remove("show");
+    }
 
-        function showInstructions(downloadType) {
-            document.getElementById("downloadSection").classList.add("hidden");
-            document.getElementById("instructionsSection").classList.remove("hidden");
+    function toggleOtherOS() {
+      const list = document.getElementById("otherOSList");
+      const title = document.getElementById("downloadTitle");
+      const desc = document.getElementById("downloadDescription");
+      const button = document.getElementById("downloadButton");
+      
+      if (!list.classList.contains("show")) {
+        title.style.display = "none";
+        desc.style.display = "none";
+        button.style.display = "none";
+        setTimeout(() => list.classList.add("show"), 50);
+      } else {
+        title.style.display = "block";
+        desc.style.display = "block";
+        button.style.display = "block";
+        list.classList.remove("show");
+      }
+    }
 
-            let instructionsText = "Please follow the steps below to download the file:\n";
+    function showRequirements() {
+      document.getElementById("downloadContent").style.display = "none";
+      document.getElementById("requirementsSection").style.display = "block";
+    }
 
-            switch (downloadType) {
-                case 'Windows EXE':
-                    instructionsText += "1. Click on the 'Download EXE' button.\n2. Your browser will prompt you to save the file.\n3. Choose a location to save the file.\n4. Once the download is complete, run the EXE file and go through the process. Then extract the ZIP file and run the game.";
-                    break;
-                case 'macOS DMG':
-                    instructionsText += "1. Click on the 'Download DMG' button.\n2. Your browser will prompt you to save the file.\n3. Choose a location to save the file.\n4. Once the download is complete, open the DMG file and follow the READ.txt file.";
-                    break;
-                default:
-                    instructionsText = "Please select a valid download.";
-            }
+    function showDownloads() {
+      document.getElementById("requirementsSection").style.display = "none";
+      document.getElementById("downloadContent").style.display = "block";
+    }
 
-            document.getElementById("downloadInstructions").textContent = instructionsText;
-        }
-    </script>
+    window.onload = detectOS;
+  </script>
 </body>
 </html>
