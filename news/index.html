@@ -59,6 +59,19 @@
             margin-top: 10px;
         }
 
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #007AFF;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
         .footer {
             font-size: 12px;
             color: #333;
@@ -98,8 +111,15 @@ const blogPosts = [
     {
         title: "New blog site!",
         content: "I've made a new blog site! Here you will see latest news from Field Simulator 2025 and more! Stay tuned.",
-        date: "April 28, 2025"
+        date: "April 28, 2025",
+        link: "https://www.example.com"
     },
+    {
+        title: "Field Simulator 2025 Patch 1.01 Released!",
+        content: "Bug fixes and performance improvements have been rolled out in this patch. Read on for more details.",
+        date: "May 3, 2025",
+        link: "https://www.example.com/patch-notes"
+    }
 ];
 
 function renderBlogPosts() {
@@ -110,6 +130,7 @@ function renderBlogPosts() {
         blogPostElement.innerHTML = `
             <h2>${post.title}</h2>
             <p>${post.content}</p>
+            <a href="${post.link}" class="read-more" target="_blank">Read More</a>
             <p class="post-date">${post.date}</p>
         `;
         blogContainer.appendChild(blogPostElement);
