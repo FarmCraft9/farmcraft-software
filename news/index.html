@@ -1,102 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarmCraft Software Blog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FarmCraft Software Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
-            background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-            position: relative;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
+      background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      position: relative;
+    }
 
-        .blog-container {
-            width: 800px;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            padding: 20px;
-            text-align: center;
-            margin-top: 30px;
-        }
+    .blog-container {
+      width: 800px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      text-align: center;
+      margin-top: 30px;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
 
-        .blog-post {
-            margin-bottom: 40px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+    .blog-post {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .blog-post h2 {
-            font-size: 22px;
-            color: #333;
-            margin-bottom: 15px;
-        }
+    .blog-post h2 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 15px;
+    }
 
-        .blog-post p {
-            font-size: 16px;
-            color: #555;
-        }
+    .blog-post p {
+      font-size: 16px;
+      color: #555;
+    }
 
-        .post-date {
-            font-size: 12px;
-            color: #888;
-            margin-top: 10px;
-        }
+    .post-date {
+      font-size: 12px;
+      color: #888;
+      margin-top: 10px;
+    }
 
-        .read-more {
-            display: inline-block;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #007AFF;
-            font-weight: 500;
-            text-decoration: none;
-        }
+    .toggle-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #007AFF;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-        .read-more:hover {
-            text-decoration: underline;
-        }
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
 
-        .footer {
-            font-size: 12px;
-            color: #333;
-            margin-top: 20px;
-        }
+    .footer {
+      font-size: 12px;
+      color: #333;
+      margin-top: 20px;
+    }
 
-        .feedback-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #007AFF;
-            color: white;
-            padding: 8px 14px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-            z-index: 1000;
-        }
+    .feedback-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #007AFF;
+      color: white;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      z-index: 1000;
+    }
 
-        .feedback-button:hover {
-            background: #005EC9;
-        }
-    </style>
+    .feedback-button:hover {
+      background: #005EC9;
+    }
+  </style>
 </head>
 <body>
 
@@ -108,33 +111,44 @@
 
 <script>
 const blogPosts = [
-    {
-        title: "New blog site!",
-        content: "I've made a new blog site! Here you will see latest news from Field Simulator 2025 and more! Stay tuned.",
-        date: "April 28, 2025",
-        link: "https://www.example.com"
-    },
-    {
-        title: "Field Simulator 2025 Patch 1.01 Released!",
-        content: "Bug fixes and performance improvements have been rolled out in this patch. Read on for more details.",
-        date: "May 3, 2025",
-        link: "https://www.example.com/patch-notes"
-    }
+  {
+    title: "New blog site!",
+    content: "I've made a new blog site! Here you will see latest news from Field Simulator 2025 and more! Stay tuned.",
+    date: "April 28, 2025"
+  }
 ];
 
 function renderBlogPosts() {
-    const blogContainer = document.getElementById('blog-container');
-    blogPosts.forEach(post => {
-        const blogPostElement = document.createElement('div');
-        blogPostElement.classList.add('blog-post');
-        blogPostElement.innerHTML = `
-            <h2>${post.title}</h2>
-            <p>${post.content}</p>
-            <a href="${post.link}" class="read-more" target="_blank">Read More</a>
-            <p class="post-date">${post.date}</p>
-        `;
-        blogContainer.appendChild(blogPostElement);
-    });
+  const blogContainer = document.getElementById('blog-container');
+
+  blogPosts.forEach((post, index) => {
+    const isLong = post.content.length > 200;
+    const shortContent = post.content.slice(0, 200) + '...';
+
+    const blogPostElement = document.createElement('div');
+    blogPostElement.classList.add('blog-post');
+
+    blogPostElement.innerHTML = `
+      <h2>${post.title}</h2>
+      <p id="content-${index}">${isLong ? shortContent : post.content}</p>
+      ${isLong ? `<span class="toggle-link" id="toggle-${index}" onclick="toggleContent(${index})">Read More</span>` : ''}
+      <p class="post-date">${post.date}</p>
+    `;
+
+    blogContainer.appendChild(blogPostElement);
+  });
+}
+
+function toggleContent(index) {
+  const contentEl = document.getElementById(`content-${index}`);
+  const toggleEl = document.getElementById(`toggle-${index}`);
+  const full = blogPosts[index].content;
+  const short = full.slice(0, 200) + '...';
+
+  const isCollapsed = toggleEl.innerText === "Read More";
+
+  contentEl.innerText = isCollapsed ? full : short;
+  toggleEl.innerText = isCollapsed ? "Show Less" : "Read More";
 }
 
 renderBlogPosts();
