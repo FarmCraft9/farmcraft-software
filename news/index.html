@@ -61,7 +61,7 @@
       margin-top: 10px;
     }
 
-    .toggle-link {
+    .read-more-link {
       display: inline-block;
       margin-top: 10px;
       font-size: 14px;
@@ -71,7 +71,7 @@
       cursor: pointer;
     }
 
-    .toggle-link:hover {
+    .read-more-link:hover {
       text-decoration: underline;
     }
 
@@ -122,17 +122,14 @@ const blogPosts = [
 function renderBlogPosts() {
   const blogContainer = document.getElementById('blog-container');
 
-  blogPosts.forEach((post, index) => {
-    const isLong = post.content.length > 200;
-    const shortContent = post.content.slice(0, 200) + '...';
-
+  blogPosts.forEach((post) => {
     const blogPostElement = document.createElement('div');
     blogPostElement.classList.add('blog-post');
 
     blogPostElement.innerHTML = `
       <h2>${post.title}</h2>
-      <p id="content-${index}">${isLong ? shortContent : post.content}</p>
-      ${isLong && post.link ? `<a class="toggle-link" href="${post.link}" target="_blank">Read More</a>` : ''}
+      <p>${post.content}</p>
+      <a class="read-more-link" href="${post.link}" target="_blank">Read More</a>
       <p class="post-date">${post.date}</p>
     `;
 
