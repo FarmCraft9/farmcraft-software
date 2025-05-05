@@ -114,18 +114,8 @@ const blogPosts = [
   {
     title: "New blog site!",
     content: "I've made a new blog site! Here you will see latest news from Field Simulator 2025 and more! Stay tuned.",
-    date: "April 28, 2025"
-  },
-    {
-    title: "Top 5 mods FS25",
-    content: "Hello everyone! Recently, I released an video titled "Farming Simulator 25: Top 5 Mods You Need to Try Right Now!". You can check it out here: "https://youtu.be/TNKpz2OZt0k". In this blog post, I will be rating the top 5 mods.
-First mod is "Unlimited color configuration" by GIANTS Software. It is an mod that allows you to set custom color on almost every vehicle. I will rate this mod 8/10
-Second mod is "Liftable pallets and bales" by Jos. It is an mod that allows you to lift pallets and bales with hand that are over 200kg. I will rate this mod 7/10
-Third mod is "John Deere XUV865M" by GIANTS Software. This is my favorite mod, this mod adds an John Deere car to Farming Simulator 25 and It's nice for forestry and transport. I will rate this mod 9/10
-Fourth mod is "Full refund" by vonNiklasson. It is an mod that allows you to sell buildings for that same price as bought. I will rate this mod 8/10
-Fifth mod is "Production point leasing" by olaf.tnt. It allows you to lease production buildings like vehicles. I will rate this mod 7/10
-Thanks for reading!",
-    date: "May 5, 2025"
+    date: "April 28, 2025",
+    link: "https://www.example.com"
   }
 ];
 
@@ -142,24 +132,12 @@ function renderBlogPosts() {
     blogPostElement.innerHTML = `
       <h2>${post.title}</h2>
       <p id="content-${index}">${isLong ? shortContent : post.content}</p>
-      ${isLong ? `<span class="toggle-link" id="toggle-${index}" onclick="toggleContent(${index})">Read More</span>` : ''}
+      ${isLong && post.link ? `<a class="toggle-link" href="${post.link}" target="_blank">Read More</a>` : ''}
       <p class="post-date">${post.date}</p>
     `;
 
     blogContainer.appendChild(blogPostElement);
   });
-}
-
-function toggleContent(index) {
-  const contentEl = document.getElementById(`content-${index}`);
-  const toggleEl = document.getElementById(`toggle-${index}`);
-  const full = blogPosts[index].content;
-  const short = full.slice(0, 200) + '...';
-
-  const isCollapsed = toggleEl.innerText === "Read More";
-
-  contentEl.innerText = isCollapsed ? full : short;
-  toggleEl.innerText = isCollapsed ? "Show Less" : "Read More";
 }
 
 renderBlogPosts();
