@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top 5 Mods in FS25</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 15px;
+    }
+
+    .feedback-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #007AFF;
+      color: white;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      z-index: 1000;
+    }
+
+    .feedback-button:hover {
+      background: #005EC9;
+    }
+
+    .blog-container {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      color: #333;
+    }
+
+    .blog-container h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .blog-container h2 {
+      font-size: 24px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .blog-container p {
+      font-size: 17px;
+      line-height: 1.7;
+      margin: 16px 0;
+    }
+
+    .blog-container a {
+      color: #007AFF;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .blog-container a:hover {
+      text-decoration: underline;
+    }
+
+    .blog-container img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 20px 0;
+      display: block;
+    }
+
+    .footer {
+      font-size: 13px;
+      color: #333;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
+
+<div class="blog-container" id="blog">
+<!-- BLOG START -->
+# Top 5 Mods for Farming Simulator 25
+
+**May 5, 2025**
+
+Hello everyone! Recently, I released a video titled ["Farming Simulator 25: Top 5 Mods You Need to Try Right Now!"](https://youtu.be/TNKpz2OZt0k). In this blog post, I will be rating the top 5 mods.
+
+---
+
+## 1. Unlimited Color Configuration  
+*By GIANTS Software*  
+This mod allows you to set custom colors on almost every vehicle. It's very cool if you want to your vehicles to be colorful.
+**Rating: 8/10**
+![](https://raw.githubusercontent.com/FarmCraft9/farmcraft-software/refs/heads/main/assets/images/UnlimiedColorConfiguration1.jpg)
+
+---
+
+## 2. Liftable Pallets and Bales
+*By Jos*
+This is an mod that allows you to lift pallets and bales with hand that are over 200kg. It's useful if you are working with pallets.
+**Rating: 7/10**
+![](https://raw.githubusercontent.com/FarmCraft9/farmcraft-software/refs/heads/main/assets/images/LiftablePalletsandBales1.jpg)
+
+---
+
+## 3. John Deere XUV865M
+*By GIANTS Software*
+This is my favorite mod, this mod adds an John Deere car to Farming Simulator 25 and It's nice for forestry and transport.
+**Rating: 9/10**
+![](https://raw.githubusercontent.com/FarmCraft9/farmcraft-software/refs/heads/main/assets/images/JohnDeereXUV865M1.jpg)
+
+---
+
+## 4. Full Refund
+*By vonNiklasson*
+This is an mod that allows you to sell buildings for that same price as bought.
+**Rating: 8/10**
+![](https://raw.githubusercontent.com/FarmCraft9/farmcraft-software/refs/heads/main/assets/images/FullRefund1.jpg)
+
+---
+
+## 5. Production Point Leasing
+*By olaf.tnt*
+This mod allows you to lease production buildings like vehicles.
+**Rating: 7/10**
+![](https://raw.githubusercontent.com/FarmCraft9/farmcraft-software/refs/heads/main/assets/images/ProductionPointLeasing1.jpg)
+
+### Thanks for Reading! Make sure to watch [Farming Simulator 25: Top 5 Mods You Need to Try Right Now!](https://youtu.be/TNKpz2OZt0k) if you haven't already.
+
+[Download Field Simulator 2025](https://farmcraft9.github.io/farmcraft-software/)
+<!-- BLOG END -->
+</div>
+
+<p class="footer">FarmCraft Software 2025</p>
+
+<script>
+  function markdownToHTML(md) {
+    return md
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/---/g, '<hr>')
+      .replace(/\n{2,}/g, '</p><p>')
+      .replace(/^(?!<h\d|<p|<a|<strong|<em|<img|<hr>)(.+)$/gm, '<p>$1</p>');
+  }
+
+  const blogDiv = document.getElementById("blog");
+  const raw = blogDiv.innerHTML.match(/<!-- BLOG START -->([\s\S]*?)<!-- BLOG END -->/)[1].trim();
+  blogDiv.innerHTML = markdownToHTML(raw);
+</script>
+
+</body>
+</html>
