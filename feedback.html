@@ -66,7 +66,7 @@
             margin: 15px 0;
         }
 
-        input, textarea, select {
+        input, textarea {
             padding: 12px;
             width: 100%;
             border-radius: 8px;
@@ -131,24 +131,6 @@
                 <textarea id="description" placeholder="Enter the description" required></textarea>
             </div>
 
-            <!-- OS Selection -->
-            <div class="input-group">
-                <label for="os">Operating System:</label>
-                <select id="os" required>
-                    <option value="Windows">Windows</option>
-                    <option value="macOS">macOS</option>
-                </select>
-            </div>
-
-            <!-- Version Selection -->
-            <div class="input-group">
-                <label for="version">Version:</label>
-                <select id="version" required>
-                    <option value="1.0.0.0">1.0.0.0</option>
-                    <option value="1.0.1.0">1.0.1.0</option>
-                </select>
-            </div>
-
             <button class="button" onclick="sendEmail()">Submit</button>
 
             <p id="error-message" style="color: red; display: none;">Please fill in all fields!</p>
@@ -163,10 +145,8 @@
             var title = document.getElementById("title").value;
             var description = document.getElementById("description").value;
             var reportType = document.getElementById("report-type").value;
-            var os = document.getElementById("os").value;
-            var version = document.getElementById("version").value;
 
-            if (!userEmail || !title || !description || !os || !version) {
+            if (!userEmail || !title || !description) {
                 document.getElementById("error-message").style.display = "block";
                 return;
             } else {
@@ -177,9 +157,7 @@
                 user_email: userEmail,
                 title: title,
                 description: description,
-                report_type: reportType,
-                os: os,
-                version: version
+                report_type: reportType
             };
 
             emailjs.send("service_p89ekhv", "template_xa4a6um", templateParams)
