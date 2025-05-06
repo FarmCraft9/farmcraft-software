@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>FarmCraft Software</title>
+  <script>
+    var correctKeys = [
+      "RA46-DAKB-G2B4-JE6W", "8YYE-ZY6C-B1Y4-RCWW", "CF1Z-7ONY-GBD7-QF34",
+      "2TIC-FJ78-I80B-A6B6", "VQ9I-1262-B8T7-O0HL", "VKDC-4ORY-MY8I-5BZP",
+      "PV1K-MC5A-SQ06-9GP7", "UJD6-DLXN-F9I5-ES05", "6CIZ-M84Y-VTAB-0VOY",
+      "469R-C8WW-FRVY-Y3Z5", "L1QR-4FW3-SATX-ZK6U", "BE4H-RLW8-3MIS-R63J",
+      "Z3CH-JW90-Y63M-4J1I", "MG8S-EH6X-RMNR-QGT2", "SD9C-9XFT-K9ZO-2RRZ"
+    ];
+
+    function validateKey() {
+      var key = document.getElementById("product-key").value;
+      var error = document.getElementById("error-message");
+      var egg = document.getElementById("easter-egg-message");
+      var loading = document.getElementById("loading-screen");
+
+      error.style.display = "none";
+      egg.style.display = "none";
+      loading.style.display = "none";
+
+      if (key.toUpperCase() === "FARMCRAFTSOFTWARE") {
+        egg.style.display = "block";
+      } else if (correctKeys.indexOf(key) !== -1) {
+        loading.style.display = "block";
+        setTimeout(function () {
+          window.location.href = "download/fieldsimulator2025old?auth=true";
+        }, 2000);
+      } else {
+        error.style.display = "block";
+      }
+    }
+
+    function hideMessages() {
+      document.getElementById("error-message").style.display = "none";
+      document.getElementById("easter-egg-message").style.display = "none";
+      document.getElementById("loading-screen").style.display = "none";
+    }
+  </script>
+</head>
+<body onload="hideMessages()">
+
+<center>
+  <h2>FarmCraft Software</h2>
+
+  <h3>Enter Product Key</h3>
+  <form onsubmit="validateKey(); return false;">
+    <input type="text" id="product-key" size="30">
+    <input type="submit" value="Download">
+  </form>
+
+  <p id="error-message" style="display:none;color:red;">Incorrect key. Please try again.</p>
+  <p id="easter-egg-message" style="display:none;"><b>You found an Easter Egg!! 🎉</b></p>
+  <p id="loading-screen" style="display:none;">Preparing your download...</p>
+
+  <p><small>FarmCraft Software 2025</small></p>
+</center>
+
+</body>
+</html>
+
