@@ -114,10 +114,26 @@
 <script>
   document.getElementById('supportForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    emailjs.sendForm('service_p89ekhv', 'template_xa4a6um', this)
+
+    // Capture selected values
+    var userEmail = document.getElementById("user_email").value;
+    var os = document.getElementById("os").value;
+    var issue = document.getElementById("issue").value;
+    var message = document.getElementById("message").value;
+
+    // Prepare template parameters
+    var templateParams = {
+      user_email: userEmail,
+      os: os,
+      issue: issue,
+      message: message
+    };
+
+    // Send email using EmailJS
+    emailjs.send('service_p89ekhv', 'template_xa4a6um', templateParams)
       .then(() => {
         alert('Support request sent successfully!');
-        this.reset();
+        this.reset();  // Reset the form after submission
       }, (error) => {
         alert('Failed to send. Please try again later.');
         console.error('EmailJS Error:', error);
