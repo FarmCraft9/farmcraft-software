@@ -3,56 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Key Verification</title>
+  <title>Enter Product Key</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 1rem;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #218838;
-    }
-    #message {
-      margin-top: 10px;
-      color: red;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 5rem; }
+    input, button { padding: 0.5rem; font-size: 1rem; margin: 0.5rem; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Enter Your Product Key</h2>
-    <input type="text" id="key-input" placeholder="XXXX-XXXX-XXXX-XXXX" />
-    <button onclick="verifyKey()">Submit</button>
-    <div id="message"></div>
-  </div>
+  <h1>Enter Your Product Key</h1>
+  <input type="text" id="productKey" placeholder="XXXX-XXXX-XXXX-XXXX">
+  <button onclick="checkKey()">Submit</button>
 
   <script>
     const correctKeys = [
@@ -73,20 +33,12 @@
       "SD9C-9XFT-K9ZO-2RRZ"
     ];
 
-    function verifyKey() {
-      const inputKey = document.getElementById("key-input").value.trim();
-      const message = document.getElementById("message");
-
-      if (!inputKey) {
-        message.textContent = "Please enter a product key.";
-        return;
-      }
-
-      if (correctKeys.includes(inputKey)) {
-        sessionStorage.setItem("auth", "true");
-        window.location.href = "download/fieldsimulator2025.html";
+    function checkKey() {
+      const userKey = document.getElementById("productKey").value.trim();
+      if (correctKeys.includes(userKey)) {
+        window.location.href = "download/verify.html?auth=true";
       } else {
-        message.textContent = "Invalid product key.";
+        alert("Invalid product key.");
       }
     }
   </script>
