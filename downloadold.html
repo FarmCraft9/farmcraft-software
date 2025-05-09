@@ -33,7 +33,7 @@
         let uses = keyUses[key] || 0;
 
         if (uses >= 10) {
-          error.textContent = "This key has been used 10 times already.";
+          error.textContent = "Download limit exceeded";
           error.style.display = "block";
           return;
         }
