@@ -6,7 +6,6 @@
     <title>FarmCraft Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Same styles as before — unchanged */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
@@ -190,7 +189,7 @@ function validateKey() {
         const uses = keyUses[inputKey] || 0;
 
         if (uses >= 10) {
-            errorMessage.textContent = "This key has been used 10 times already.";
+            errorMessage.textContent = "Download limit exceeded.";
             errorMessage.style.display = "block";
             return;
         }
