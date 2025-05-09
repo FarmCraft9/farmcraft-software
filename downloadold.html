@@ -28,19 +28,26 @@
       }
 
       if (correctKeys.includes(key)) {
-        // Use localStorage to track usage
-        let keyUses = JSON.parse(localStorage.getItem("keyUses") || "{}");
-        let uses = keyUses[key] || 0;
+        let now = Date.now();
+        let data = JSON.parse(localStorage.getItem("keyData") || "{}");
+        let keyInfo = data[key] || { uses: 0, lastUsed: 0 };
 
-        if (uses >= 10) {
-          error.textContent = "Download limit exceeded";
+        let daysSinceLastUse = (now - keyInfo.lastUsed) / (1000 * 60 * 60 * 24);
+
+        if (keyInfo.uses >= 10 && daysSinceLastUse < 30) {
+          error.textContent = "Download limit exceeded. Try again after 30 days.";
           error.style.display = "block";
           return;
         }
 
-        // Increment and store usage
-        keyUses[key] = uses + 1;
-        localStorage.setItem("keyUses", JSON.stringify(keyUses));
+        if (daysSinceLastUse >= 30) {
+          keyInfo.uses = 0;
+        }
+
+        keyInfo.uses++;
+        keyInfo.lastUsed = now;
+        data[key] = keyInfo;
+        localStorage.setItem("keyData", JSON.stringify(data));
 
         loading.style.display = "block";
         setTimeout(function () {
@@ -63,7 +70,6 @@
 
 <center>
   <h2>FarmCraft Software</h2>
-
   <h3>Enter Product Key</h3>
   <form onsubmit="validateKey(); return false;">
     <input type="text" id="product-key" size="30">
@@ -73,7 +79,6 @@
   <p id="error-message" style="display:none;color:red;">Incorrect key. Please try again.</p>
   <p id="easter-egg-message" style="display:none;"><b>You found an Easter Egg!! 🎉</b></p>
   <p id="loading-screen" style="display:none;">Preparing your download...</p>
-
   <p><small>FarmCraft Software 2025</small></p>
 </center>
 
