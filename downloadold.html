@@ -13,7 +13,7 @@
     ];
 
     function validateKey() {
-      var key = document.getElementById("product-key").value;
+      var key = document.getElementById("product-key").value.trim();
       var error = document.getElementById("error-message");
       var egg = document.getElementById("easter-egg-message");
       var loading = document.getElementById("loading-screen");
@@ -24,12 +24,30 @@
 
       if (key.toUpperCase() === "FARMCRAFTSOFTWARE") {
         egg.style.display = "block";
-      } else if (correctKeys.indexOf(key) !== -1) {
+        return;
+      }
+
+      if (correctKeys.includes(key)) {
+        // Use localStorage to track usage
+        let keyUses = JSON.parse(localStorage.getItem("keyUses") || "{}");
+        let uses = keyUses[key] || 0;
+
+        if (uses >= 10) {
+          error.textContent = "This key has been used 10 times already.";
+          error.style.display = "block";
+          return;
+        }
+
+        // Increment and store usage
+        keyUses[key] = uses + 1;
+        localStorage.setItem("keyUses", JSON.stringify(keyUses));
+
         loading.style.display = "block";
         setTimeout(function () {
           window.location.href = "download/fieldsimulator2025old?auth=true";
         }, 2000);
       } else {
+        error.textContent = "Incorrect key. Please try again.";
         error.style.display = "block";
       }
     }
@@ -61,4 +79,3 @@
 
 </body>
 </html>
-
