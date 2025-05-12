@@ -1,6 +1,7 @@
 @echo off
 cls
 
+title Field Simulator 2025
 echo [42mFIELD SIMULATOR 2025[0m
 echo.
 echo Keyboard Controls:
