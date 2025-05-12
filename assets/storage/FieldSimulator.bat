@@ -11,5 +11,5 @@ echo.
 echo Right arrow key + Enter: Button 2
 
 echo Download the latest version at [1mhttps://farmcraft9.github.io/farmcraft-software/[0m
-start assets\FieldSimulator2025.ps1
+powershell assets\FieldSimulator2025.ps1
 pause
