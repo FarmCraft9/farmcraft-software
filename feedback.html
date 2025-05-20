@@ -125,6 +125,11 @@
     </div>
 
     <div class="input-group">
+      <label for="user-name">Your Name:</label>
+      <input type="text" id="user-name" placeholder="Enter your name" required />
+    </div>
+
+    <div class="input-group">
       <label for="title">Title:</label>
       <input type="text" id="title" placeholder="Enter the title" required />
     </div>
@@ -144,20 +149,27 @@
 
 <script>
   function sendEmail() {
-    var email = document.getElementById("user-email");
-    var title = document.getElementById("title");
-    var description = document.getElementById("description");
-    var reportType = document.getElementById("report-type");
+    const email = document.getElementById("user-email");
+    const name = document.getElementById("user-name");
+    const title = document.getElementById("title");
+    const description = document.getElementById("description");
+    const reportType = document.getElementById("report-type");
 
-    if (!email.checkValidity() || !title.value.trim() || !description.value.trim()) {
+    if (
+      !email.checkValidity() ||
+      !name.value.trim() ||
+      !title.value.trim() ||
+      !description.value.trim()
+    ) {
       document.getElementById("error-message").style.display = "block";
       return;
     }
 
     document.getElementById("error-message").style.display = "none";
 
-    var templateParams = {
+    const templateParams = {
       user_email: email.value,
+      user_name: name.value,
       title: title.value,
       description: description.value,
       report_type: reportType.value
