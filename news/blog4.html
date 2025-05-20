@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top 5 Mods in FS25</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 15px;
+    }
+
+    .feedback-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #007AFF;
+      color: white;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      z-index: 1000;
+    }
+
+    .feedback-button:hover {
+      background: #005EC9;
+    }
+
+    .blog-container {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      color: #333;
+    }
+
+    .blog-container h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .blog-container h2 {
+      font-size: 24px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .blog-container p {
+      font-size: 17px;
+      line-height: 1.7;
+      margin: 16px 0;
+    }
+
+    .blog-container a {
+      color: #007AFF;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .blog-container a:hover {
+      text-decoration: underline;
+    }
+
+    .blog-container img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 20px 0;
+      display: block;
+    }
+
+    .footer {
+      font-size: 13px;
+      color: #333;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
+
+<div class="blog-container" id="blog">
+<!-- BLOG START -->
+# Field Simulator 2025 New GUI is here!
+
+**May 20, 2025**
+
+Hello everyone! Few days ago, Field Simulator 2025 Patch 1.2 was released, introducing new GUI, and many other features!
+[Field Simulator 2025 Patch 1.2 Launch trailer]https://youtu.be/Riel2iPFNVY)
+Enjoy!
+
+[Download Field Simulator 2025](https://farmcraft9.github.io/farmcraft-software/)
+<!-- BLOG END -->
+</div>
+
+<p class="footer">FarmCraft Software 2025</p>
+
+<script>
+  function markdownToHTML(md) {
+    return md
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/---/g, '<hr>')
+      .replace(/\n{2,}/g, '</p><p>')
+      .replace(/^(?!<h\d|<p|<a|<strong|<em|<img|<hr>)(.+)$/gm, '<p>$1</p>');
+  }
+
+  const blogDiv = document.getElementById("blog");
+  const raw = blogDiv.innerHTML.match(/<!-- BLOG START -->([\s\S]*?)<!-- BLOG END -->/)[1].trim();
+  blogDiv.innerHTML = markdownToHTML(raw);
+</script>
+
+</body>
+</html>
