@@ -1,97 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Download - Field Simulator 2025</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "San Francisco", sans-serif;
-      background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
-      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      color: #f4f4f4;
+      flex-direction: column;
+      position: relative;
     }
 
     .window {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(20px);
+      background: rgba(30, 30, 30, 0.85);
+      padding: 30px 24px;
       border-radius: 16px;
-      padding: 24px;
-      width: 600px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      max-width: 450px;
+      width: 100%;
       text-align: center;
+      position: relative;
     }
 
     .title-bar {
-      font-weight: 500;
-      font-size: 16px;
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      padding: 12px;
-      border-radius: 12px 12px 0 0;
-      margin: -24px -24px 24px;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #00FFC6;
     }
 
     h1 {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
-      color: #333;
       margin-bottom: 10px;
     }
 
     p {
       font-size: 14px;
-      color: #555;
+      color: #ccc;
       margin-bottom: 20px;
     }
 
-    .button, .other-os-button {
-      display: block;
-      background: #007AFF;
-      color: white;
-      padding: 12px;
+    ul {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 20px;
+      padding-left: 0;
+      color: #bbb;
       font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 10px;
-      margin: 10px auto;
-      width: 90%;
-      transition: 0.3s;
+      line-height: 1.5;
+    }
+
+    ul li::before {
+      content: "•";
+      color: #00FFC6;
+      display: inline-block; 
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .button {
+      background: #00FFC6;
+      color: #000;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
       border: none;
       cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      display: block;
+      text-align: center;
     }
 
     .button:hover {
-      background: #005EC9;
+      background: #00cfa6;
+    }
+
+    .small-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #00FFC6;
+      color: #000;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+
+    .small-button:hover {
+      background: #00cfa6;
     }
 
     .other-os-link {
-      color: #007AFF;
-      text-decoration: underline;
+      color: #00FFC6;
       font-size: 14px;
+      margin-top: 10px;
+      text-decoration: underline;
       cursor: pointer;
       display: inline-block;
-      margin-top: 10px;
     }
 
     .other-os-list {
-      margin-top: 12px;
+      margin-top: 15px;
       display: none;
       flex-direction: column;
       gap: 10px;
       opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.3s ease;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .other-os-list.show {
@@ -101,64 +135,35 @@
     }
 
     .other-os-button {
-      background: rgba(255, 255, 255, 0.4);
-      color: #007AFF;
-      border: 2px solid #007AFF;
-      backdrop-filter: blur(10px);
+      background: rgba(0, 255, 198, 0.15);
+      color: #00FFC6;
+      border: 2px solid #00FFC6;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .other-os-button:hover {
-      background: rgba(0, 122, 255, 0.15);
+      background: #00FFC6;
+      color: #000;
     }
 
     .footer {
       font-size: 12px;
-      color: #888;
-      margin-top: 20px;
+      color: #666;
+      margin-top: 25px;
     }
 
-    .small-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: #007AFF;
-      color: white;
-      padding: 8px 14px;
-      font-size: 12px;
-      font-weight: 500;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .small-button:hover {
-      background: #005EC9;
-    }
-
-    ul {
-      text-align: left;
-      padding-left: 20px;
-      font-size: 14px;
-      color: #333;
-    }
-
-    ul li {
-      margin-bottom: 8px;
-    }
   </style>
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const isAuthorized = urlParams.get("auth") === "true";
-
-    if (!isAuthorized) {
-      document.addEventListener("DOMContentLoaded", () => {
-        document.body.innerHTML = "<h1>403 Forbidden</h1><p>You don't have permission to access this resource.</p><a href='../index.html'>Go Back</a>";
-      });
-    }
-  </script>
 </head>
 <body>
+
   <button class="small-button" onclick="showRequirements()">Minimum Requirements</button>
 
   <div class="window">
@@ -166,8 +171,10 @@
     <div id="downloadContent">
       <h1 id="downloadTitle">Loading...</h1>
       <p id="downloadDescription">Please wait while we detect your OS.</p>
-      <a id="downloadButton" href="#" class="button">Download</a>
-      <span class="other-os-link" onclick="toggleOtherOS()">Other OS</span>
+      <a id="downloadButton" href="#" class="button" tabindex="0">Download</a>
+      <div>
+        <span class="other-os-link" onclick="toggleOtherOS()">Other OS</span>
+      </div>
       <div id="otherOSList" class="other-os-list">
         <button class="other-os-button" onclick="selectOS('windows')">Windows</button>
         <button class="other-os-button" onclick="selectOS('mac')">macOS</button>
@@ -190,69 +197,85 @@
     <p class="footer">FarmCraft Software 2025</p>
   </div>
 
-  <script>
-    function detectOS() {
-      const platform = navigator.platform.toLowerCase();
-      if (platform.includes('win')) {
-        selectOS('windows');
-      } else if (platform.includes('mac')) {
-        selectOS('mac');
-      } else {
-        document.getElementById("downloadTitle").textContent = "Unsupported OS";
-        document.getElementById("downloadDescription").textContent = "Your operating system is not officially supported, but you can still download for Windows or macOS below.";
-        document.getElementById("downloadButton").href = "#";
-        document.getElementById("downloadButton").textContent = "No Download Available";
-      }
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const isAuthorized = urlParams.get("auth") === "true";
+
+  if (!isAuthorized) {
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.innerHTML = `
+        <div class="window" style="max-width: 400px;">
+          <div class="title-bar">403 Forbidden</div>
+          <h1>Access Denied</h1>
+          <p>You don't have permission to access this resource.</p>
+          <a href="../index.html" class="button">Go Back</a>
+        </div>
+      `;
+    });
+  } else {
+    document.addEventListener("DOMContentLoaded", () => {
+      detectOS();
+    });
+  }
+
+  function detectOS() {
+    const platform = navigator.platform.toLowerCase();
+    if (platform.includes('win')) {
+      selectOS('windows');
+    } else if (platform.includes('mac')) {
+      selectOS('mac');
+    } else {
+      document.getElementById("downloadTitle").textContent = "Unsupported OS";
+      document.getElementById("downloadDescription").textContent = "Your operating system is not officially supported, but you can still download for Windows or macOS below.";
+      const btn = document.getElementById("downloadButton");
+      btn.href = "#";
+      btn.textContent = "No Download Available";
+      btn.disabled = true;
+      btn.style.cursor = 'not-allowed';
     }
+  }
 
-    function selectOS(os) {
-      if (os === 'windows') {
-        document.getElementById("downloadTitle").textContent = "Field Simulator 2025 (Windows)";
-        document.getElementById("downloadDescription").textContent = "Version 2.0.0.0 (EXE File)";
-        document.getElementById("downloadButton").href = "FieldSimulator2025ESDPatch2_0_0_0.exe";
-        document.getElementById("downloadButton").textContent = "Download EXE";
-      } else if (os === 'mac') {
-        document.getElementById("downloadTitle").textContent = "Field Simulator 2025 (macOS)";
-        document.getElementById("downloadDescription").textContent = "Version 1.0.0.0 (DMG File)";
-        document.getElementById("downloadButton").href = "FieldSimulator2025.dmg";
-        document.getElementById("downloadButton").textContent = "Download DMG";
-      }
-      document.getElementById("downloadTitle").style.display = "block";
-      document.getElementById("downloadDescription").style.display = "block";
-      document.getElementById("downloadButton").style.display = "block";
-      document.getElementById("otherOSList").classList.remove("show");
+  function selectOS(os) {
+    const title = document.getElementById("downloadTitle");
+    const desc = document.getElementById("downloadDescription");
+    const btn = document.getElementById("downloadButton");
+
+    if (os === 'windows') {
+      title.textContent = "Field Simulator 2025 (Windows)";
+      desc.textContent = "Version 2.0.0.0 - Windows installer";
+      btn.href = "download/FieldSimulator2025_Windows_Setup.exe";
+      btn.textContent = "Download for Windows";
+      btn.disabled = false;
+      btn.style.cursor = 'pointer';
+    } else if (os === 'mac') {
+      title.textContent = "Field Simulator 2025 (macOS)";
+      desc.textContent = "Version 2.0.0.0 - macOS installer";
+      btn.href = "download/FieldSimulator2025_macOS.dmg";
+      btn.textContent = "Download for macOS";
+      btn.disabled = false;
+      btn.style.cursor = 'pointer';
     }
+  }
 
-    function toggleOtherOS() {
-      const list = document.getElementById("otherOSList");
-      const title = document.getElementById("downloadTitle");
-      const desc = document.getElementById("downloadDescription");
-      const button = document.getElementById("downloadButton");
-
-      if (!list.classList.contains("show")) {
-        title.style.display = "none";
-        desc.style.display = "none";
-        button.style.display = "none";
-        setTimeout(() => list.classList.add("show"), 50);
-      } else {
-        title.style.display = "block";
-        desc.style.display = "block";
-        button.style.display = "block";
-        list.classList.remove("show");
-      }
+  function toggleOtherOS() {
+    const list = document.getElementById("otherOSList");
+    if (list.classList.contains("show")) {
+      list.classList.remove("show");
+    } else {
+      list.classList.add("show");
     }
+  }
 
-    function showRequirements() {
-      document.getElementById("downloadContent").style.display = "none";
-      document.getElementById("requirementsSection").style.display = "block";
-    }
+  function showRequirements() {
+    document.getElementById("downloadContent").style.display = "none";
+    document.getElementById("requirementsSection").style.display = "block";
+  }
 
-    function showDownloads() {
-      document.getElementById("requirementsSection").style.display = "none";
-      document.getElementById("downloadContent").style.display = "block";
-    }
+  function showDownloads() {
+    document.getElementById("requirementsSection").style.display = "none";
+    document.getElementById("downloadContent").style.display = "block";
+  }
+</script>
 
-    window.onload = detectOS;
-  </script>
 </body>
 </html>
