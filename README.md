@@ -1,7 +1,5 @@
 # FarmCraft Software
 
-## **Do _NOT_ look at the page's source code. This is very important.**
-
 Welcome to FarmCraft Software! You can download Field Simulator 2025 here, and submit feedback!
 
 > What is Field Simulator 2025 about?
