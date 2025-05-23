@@ -2,47 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FarmCraft Software</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    :root {
-      --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      --text-color: #f4f4f4;
-      --input-bg: #1f1f1f;
-      --input-border: #555;
-      --error-color: #ff5c5c;
-      --primary: #00FFC6;
-      --primary-hover: #00cfa6;
-      --card-bg: rgba(30, 30, 30, 0.85);
-      --footer-color: #999;
-    }
-
-    body.light-mode {
-      --bg-gradient: url('https://www.transparenttextures.com/patterns/symphony.png'), linear-gradient(135deg, #fdfdfd, #e7f5ff);
-      --text-color: #111;
-      --input-bg: #ffffff;
-      --input-border: #aaa;
-      --error-color: #d33;
-      --primary: #007aff;
-      --primary-hover: #005fcc;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --footer-color: #666;
-    }
-
     body {
       font-family: 'Poppins', sans-serif;
-      background: var(--bg-gradient);
-      background-size: cover;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      color: var(--text-color);
+      color: #f4f4f4;
       flex-direction: column;
-      transition: background 0.5s ease, color 0.5s ease;
     }
 
     .loading-screen {
@@ -59,7 +33,7 @@
 
     .spinner {
       border: 6px solid #444;
-      border-top: 6px solid var(--primary);
+      border-top: 6px solid #00FFC6;
       border-radius: 50%;
       width: 60px;
       height: 60px;
@@ -75,7 +49,7 @@
     .feedback-button {
       position: absolute;
       top: 20px; right: 20px;
-      background: var(--primary);
+      background: #00FFC6;
       color: #000;
       padding: 8px 16px;
       font-size: 14px;
@@ -87,25 +61,11 @@
     }
 
     .feedback-button:hover {
-      background: var(--primary-hover);
-    }
-
-    .mode-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: var(--primary);
-      color: #000;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      background: #00cfa6;
     }
 
     .window {
-      background: var(--card-bg);
+      background: rgba(30, 30, 30, 0.85);
       padding: 30px 24px;
       border-radius: 16px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.3);
@@ -117,7 +77,7 @@
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 16px;
-      color: var(--primary);
+      color: #00FFC6;
     }
 
     h1 {
@@ -128,7 +88,7 @@
 
     p {
       font-size: 14px;
-      color: var(--text-color);
+      color: #ccc;
       margin-bottom: 20px;
     }
 
@@ -144,14 +104,15 @@
       padding: 10px 14px;
       font-size: 14px;
       border-radius: 8px;
-      border: 1px solid var(--input-border);
+      border: none;
       outline: none;
-      background: var(--input-bg);
-      color: var(--text-color);
+      background: #1f1f1f;
+      color: #eee;
+      border: 1px solid #555;
     }
 
     .button {
-      background: var(--primary);
+      background: #00FFC6;
       color: #000;
       padding: 10px 16px;
       font-size: 14px;
@@ -163,11 +124,11 @@
     }
 
     .button:hover {
-      background: var(--primary-hover);
+      background: #00cfa6;
     }
 
     .error-message {
-      color: var(--error-color);
+      color: #ff5c5c;
       font-size: 13px;
       display: none;
     }
@@ -176,7 +137,7 @@
       display: none;
       font-size: 18px;
       font-weight: bold;
-      color: var(--primary);
+      color: #00FFC6;
       margin-top: 20px;
       animation: bounce 1s infinite;
     }
@@ -188,7 +149,7 @@
 
     .footer {
       font-size: 12px;
-      color: var(--footer-color);
+      color: #999;
       margin-top: 10px;
     }
   </style>
@@ -201,7 +162,6 @@
 </div>
 
 <a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
-<button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
 
 <div class="window">
   <div class="title-bar">FarmCraft Software</div>
@@ -220,52 +180,58 @@
 
 <script>
 const correctKeys = [
-    "RA46-DAKB-G2B4-JE6W", "8YYE-ZY6C-B1Y4-RCWW", "CF1Z-7ONY-GBD7-QF34",
-    "2TIC-FJ78-I80B-A6B6", "VQ9I-1262-B8T7-O0HL", "VKDC-4ORY-MY8I-5BZP",
-    "PV1K-MC5A-SQ06-9GP7", "UJD6-DLXN-F9I5-ES05", "6CIZ-M84Y-VTAB-0VOY",
-    "469R-C8WW-FRVY-Y3Z5", "L1QR-4FW3-SATX-ZK6U", "BE4H-RLW8-3MIS-R63J",
-    "Z3CH-JW90-Y63M-4J1I", "MG8S-EH6X-RMNR-QGT2", "SD9C-9XFT-K9ZO-2RRZ"
+    "RA46-DAKB-G2B4-JE6W",
+    "8YYE-ZY6C-B1Y4-RCWW",
+    "CF1Z-7ONY-GBD7-QF34",
+    "2TIC-FJ78-I80B-A6B6",
+    "VQ9I-1262-B8T7-O0HL",
+    "VKDC-4ORY-MY8I-5BZP",
+    "PV1K-MC5A-SQ06-9GP7",
+    "UJD6-DLXN-F9I5-ES05",
+    "6CIZ-M84Y-VTAB-0VOY",
+    "469R-C8WW-FRVY-Y3Z5",
+    "L1QR-4FW3-SATX-ZK6U",
+    "BE4H-RLW8-3MIS-R63J",
+    "Z3CH-JW90-Y63M-4J1I",
+    "MG8S-EH6X-RMNR-QGT2",
+    "SD9C-9XFT-K9ZO-2RRZ"
 ];
 
 function validateKey() {
-  const inputKey = document.getElementById("product-key").value.trim();
-  const errorMessage = document.getElementById("error-message");
-  const easterEggMessage = document.getElementById("easter-egg-message");
-  const loadingScreen = document.getElementById("loading-screen");
+    const inputKey = document.getElementById("product-key").value.trim();
+    const errorMessage = document.getElementById("error-message");
+    const easterEggMessage = document.getElementById("easter-egg-message");
+    const loadingScreen = document.getElementById("loading-screen");
 
-  errorMessage.style.display = "none";
-  easterEggMessage.style.display = "none";
+    errorMessage.style.display = "none";
+    easterEggMessage.style.display = "none";
 
-  if (inputKey.toUpperCase() === "FARMCRAFTSOFTWARE") {
-    easterEggMessage.style.display = "block";
-    return;
-  }
-
-  if (correctKeys.includes(inputKey)) {
-    let keyUses = JSON.parse(localStorage.getItem("keyUses") || "{}");
-    const uses = keyUses[inputKey] || 0;
-
-    if (uses >= 10) {
-      errorMessage.textContent = "Download limit exceeded.";
-      errorMessage.style.display = "block";
-      return;
+    if (inputKey.toUpperCase() === "FARMCRAFTSOFTWARE") {
+        easterEggMessage.style.display = "block";
+        return;
     }
 
-    keyUses[inputKey] = uses + 1;
-    localStorage.setItem("keyUses", JSON.stringify(keyUses));
+    if (correctKeys.includes(inputKey)) {
+        let keyUses = JSON.parse(localStorage.getItem("keyUses") || "{}");
+        const uses = keyUses[inputKey] || 0;
 
-    loadingScreen.style.display = "flex";
-    setTimeout(() => {
-      window.location.href = "download/fieldsimulator2025?auth=true";
-    }, 2000);
-  } else {
-    errorMessage.textContent = "Incorrect key. Please try again.";
-    errorMessage.style.display = "block";
-  }
-}
+        if (uses >= 10) {
+            errorMessage.textContent = "Download limit exceeded.";
+            errorMessage.style.display = "block";
+            return;
+        }
 
-function toggleMode() {
-  document.body.classList.toggle("light-mode");
+        keyUses[inputKey] = uses + 1;
+        localStorage.setItem("keyUses", JSON.stringify(keyUses));
+
+        loadingScreen.style.display = "flex";
+        setTimeout(() => {
+            window.location.href = "download/fieldsimulator2025?auth=true";
+        }, 2000);
+    } else {
+        errorMessage.textContent = "Incorrect key. Please try again.";
+        errorMessage.style.display = "block";
+    }
 }
 </script>
 
