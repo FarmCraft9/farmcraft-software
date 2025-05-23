@@ -2,20 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const isAuthorized = urlParams.get("auth") === "true";
-
-    if (!isAuthorized) {
-      document.addEventListener("DOMContentLoaded", () => {
-        document.body.innerHTML = "<h1>403 Forbidden</h1><p>You don't have permission to access this resource.</p><a href='../index.html'>Go Back</a>";
-      });
-    }
-  </script>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Download - Field Simulator 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -23,48 +11,51 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "San Francisco", sans-serif;
       background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      position: relative;
     }
+
     .window {
-      width: 600px;
       background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(20px);
       border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      padding: 20px;
+      padding: 24px;
+      width: 600px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
+
     .title-bar {
-      text-align: center;
-      padding: 12px;
+      font-weight: 500;
+      font-size: 16px;
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      font-weight: 500;
-      margin-bottom: 20px;
+      padding: 12px;
+      border-radius: 12px 12px 0 0;
+      margin: -24px -24px 24px;
     }
+
     h1 {
       font-size: 22px;
       font-weight: 700;
-      margin-bottom: 10px;
       color: #333;
+      margin-bottom: 10px;
     }
+
     p {
       font-size: 14px;
       color: #555;
       margin-bottom: 20px;
     }
-    .button {
+
+    .button, .other-os-button {
       display: block;
       background: #007AFF;
       color: white;
@@ -73,16 +64,59 @@
       font-weight: 500;
       text-decoration: none;
       border-radius: 10px;
-      margin: 10px auto 5px;
+      margin: 10px auto;
       width: 90%;
       transition: 0.3s;
-      cursor: pointer;
-      text-align: center;
       border: none;
+      cursor: pointer;
     }
+
     .button:hover {
       background: #005EC9;
     }
+
+    .other-os-link {
+      color: #007AFF;
+      text-decoration: underline;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .other-os-list {
+      margin-top: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+
+    .other-os-list.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .other-os-button {
+      background: rgba(255, 255, 255, 0.4);
+      color: #007AFF;
+      border: 2px solid #007AFF;
+      backdrop-filter: blur(10px);
+    }
+
+    .other-os-button:hover {
+      background: rgba(0, 122, 255, 0.15);
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #888;
+      margin-top: 20px;
+    }
+
     .small-button {
       position: absolute;
       top: 20px;
@@ -97,54 +131,32 @@
       cursor: pointer;
       transition: 0.3s;
     }
+
     .small-button:hover {
       background: #005EC9;
     }
-    .other-os-link {
-      color: #007AFF;
+
+    ul {
+      text-align: left;
+      padding-left: 20px;
       font-size: 14px;
-      margin-top: 8px;
-      text-decoration: underline;
-      cursor: pointer;
-      display: inline-block;
+      color: #333;
     }
-    .other-os-list {
-      margin-top: 10px;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    .other-os-list.show {
-      display: flex;
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .other-os-button {
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(10px);
-      color: #007AFF;
-      border: 2px solid #007AFF;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 500;
-      width: 90%;
-      margin: 0 auto;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .other-os-button:hover {
-      background: rgba(0, 122, 255, 0.15);
-    }
-    .footer {
-      font-size: 12px;
-      color: #888;
-      margin-top: 20px;
+
+    ul li {
+      margin-bottom: 8px;
     }
   </style>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAuthorized = urlParams.get("auth") === "true";
+
+    if (!isAuthorized) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.innerHTML = "<h1>403 Forbidden</h1><p>You don't have permission to access this resource.</p><a href='../index.html'>Go Back</a>";
+      });
+    }
+  </script>
 </head>
 <body>
   <button class="small-button" onclick="showRequirements()">Minimum Requirements</button>
@@ -155,9 +167,7 @@
       <h1 id="downloadTitle">Loading...</h1>
       <p id="downloadDescription">Please wait while we detect your OS.</p>
       <a id="downloadButton" href="#" class="button">Download</a>
-      <div>
-        <span class="other-os-link" onclick="toggleOtherOS()">Other OS</span>
-      </div>
+      <span class="other-os-link" onclick="toggleOtherOS()">Other OS</span>
       <div id="otherOSList" class="other-os-list">
         <button class="other-os-button" onclick="selectOS('windows')">Windows</button>
         <button class="other-os-button" onclick="selectOS('mac')">macOS</button>
@@ -166,7 +176,7 @@
 
     <div id="requirementsSection" style="display: none;">
       <h1>Minimum Requirements</h1>
-      <ul style="text-align: left; margin-top: 10px;">
+      <ul>
         <li><b>Operating System:</b> Windows Vista or later / macOS 10.0 or later</li>
         <li><b>Processor:</b> Optional</li>
         <li><b>Memory:</b> 128 MB RAM or more</li>
@@ -174,7 +184,7 @@
         <li><b>Storage:</b> Windows: A few MB / macOS: A few KB</li>
         <li><b>Required App:</b> Command Prompt (Windows) or Terminal (macOS)</li>
       </ul>
-      <button class="button" style="margin-top: 15px;" onclick="showDownloads()">Go to Downloads</button>
+      <button class="button" onclick="showDownloads()">Go to Downloads</button>
     </div>
 
     <p class="footer">FarmCraft Software 2025</p>
@@ -201,18 +211,15 @@
         document.getElementById("downloadDescription").textContent = "Version 2.0.0.0 (EXE File)";
         document.getElementById("downloadButton").href = "FieldSimulator2025ESDPatch2_0_0_0.exe";
         document.getElementById("downloadButton").textContent = "Download EXE";
-        document.getElementById("downloadButton").style.display = "block";
-        document.getElementById("downloadTitle").style.display = "block";
-        document.getElementById("downloadDescription").style.display = "block";
       } else if (os === 'mac') {
         document.getElementById("downloadTitle").textContent = "Field Simulator 2025 (macOS)";
         document.getElementById("downloadDescription").textContent = "Version 1.0.0.0 (DMG File)";
         document.getElementById("downloadButton").href = "FieldSimulator2025.dmg";
         document.getElementById("downloadButton").textContent = "Download DMG";
-        document.getElementById("downloadButton").style.display = "block";
-        document.getElementById("downloadTitle").style.display = "block";
-        document.getElementById("downloadDescription").style.display = "block";
       }
+      document.getElementById("downloadTitle").style.display = "block";
+      document.getElementById("downloadDescription").style.display = "block";
+      document.getElementById("downloadButton").style.display = "block";
       document.getElementById("otherOSList").classList.remove("show");
     }
 
@@ -221,7 +228,7 @@
       const title = document.getElementById("downloadTitle");
       const desc = document.getElementById("downloadDescription");
       const button = document.getElementById("downloadButton");
-      
+
       if (!list.classList.contains("show")) {
         title.style.display = "none";
         desc.style.display = "none";
