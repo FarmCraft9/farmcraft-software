@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Patch 1.2 Field Simulator 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     * {
       margin: 0;
@@ -13,71 +13,86 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 30px 15px;
+      padding: 40px 20px 60px;
+      position: relative;
     }
 
     .feedback-button {
       position: fixed;
       top: 20px;
       right: 20px;
-      background: #007AFF;
-      color: white;
-      padding: 8px 14px;
+      background: #00FFC6;
+      color: #000;
+      font-weight: 700;
       font-size: 14px;
-      font-weight: 500;
+      padding: 10px 18px;
+      border-radius: 10px;
       text-decoration: none;
-      border-radius: 8px;
-      transition: background-color 0.3s;
-      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,255,198,0.5);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      z-index: 9999;
+      user-select: none;
     }
 
-    .feedback-button:hover {
-      background: #005EC9;
+    .feedback-button:hover,
+    .feedback-button:focus {
+      background: #00cc9e;
+      color: #000;
+      outline: none;
+      box-shadow: 0 6px 16px rgba(0,204,158,0.7);
     }
 
     .blog-container {
-      width: 100%;
-      max-width: 900px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
+      background: rgba(20, 20, 20, 0.85);
+      backdrop-filter: blur(25px);
       border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      padding: 40px;
-      color: #333;
+      box-shadow: 0 10px 40px rgba(0,255,198,0.25);
+      width: 800px;
+      max-width: 95vw;
+      padding: 30px 40px;
     }
 
     .blog-container h1 {
-      font-size: 32px;
+      color: #00FFC6;
+      font-size: 28px;
+      font-weight: 700;
       margin-bottom: 20px;
     }
 
     .blog-container h2 {
-      font-size: 24px;
-      margin-top: 30px;
+      color: #00FFC6;
+      font-size: 22px;
+      font-weight: 600;
+      margin-top: 25px;
       margin-bottom: 10px;
-      color: #222;
     }
 
     .blog-container p {
-      font-size: 17px;
-      line-height: 1.7;
-      margin: 16px 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #b0f0e0;
+      margin-bottom: 16px;
     }
 
     .blog-container a {
-      color: #007AFF;
+      color: #00FFC6;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease;
     }
 
-    .blog-container a:hover {
-      text-decoration: underline;
+    .blog-container a:hover,
+    .blog-container a:focus {
+      border-color: #00FFC6;
+      outline: none;
     }
 
     .blog-container img {
@@ -89,8 +104,10 @@
 
     .footer {
       font-size: 13px;
-      color: #333;
-      margin-top: 40px;
+      color: #555;
+      margin-top: 30px;
+      text-align: center;
+      user-select: none;
     }
   </style>
 </head>
