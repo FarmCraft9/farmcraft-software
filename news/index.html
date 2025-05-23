@@ -2,161 +2,176 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FarmCraft Software Blog</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Inter", sans-serif;
-      background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/66679789de52f27958b42936/1718065050515/SequoiaLight.png') center/cover no-repeat;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
-      height: 100vh;
+      align-items: center;
+      padding: 40px 20px 60px;
       position: relative;
     }
 
     .blog-container {
-      width: 800px;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(20px);
+      background: rgba(20, 20, 20, 0.85);
+      backdrop-filter: blur(25px);
       border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      padding: 20px;
-      text-align: center;
-      margin-top: 30px;
+      box-shadow: 0 10px 40px rgba(0,255,198,0.25);
+      width: 800px;
+      max-width: 95vw;
+      max-height: 85vh;
       overflow-y: auto;
-      max-height: 90vh;
+      padding: 30px 40px;
     }
 
     .blog-post {
-      margin-bottom: 40px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: rgba(0, 255, 198, 0.05);
+      border: 1px solid rgba(0,255,198,0.3);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0,255,198,0.12);
+      transition: background 0.3s ease;
+    }
+    .blog-post:hover {
+      background: rgba(0, 255, 198, 0.12);
     }
 
     .blog-post h2 {
-      font-size: 22px;
-      color: #333;
-      margin-bottom: 15px;
+      color: #00FFC6;
+      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 12px;
+      user-select: text;
     }
 
     .blog-post p {
       font-size: 16px;
-      color: #555;
+      line-height: 1.5;
+      color: #b0f0e0;
+      margin-bottom: 14px;
+      user-select: text;
     }
 
     .post-date {
-      font-size: 12px;
-      color: #888;
-      margin-top: 10px;
+      font-size: 13px;
+      color: #66fff7;
+      font-weight: 600;
+      user-select: none;
     }
 
     .read-more-link {
-      display: inline-block;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #007AFF;
-      font-weight: 500;
+      font-size: 15px;
+      color: #00FFC6;
+      font-weight: 600;
       text-decoration: none;
+      border-bottom: 2px solid transparent;
       cursor: pointer;
+      user-select: none;
+      transition: border-color 0.3s ease;
     }
-
-    .read-more-link:hover {
-      text-decoration: underline;
+    .read-more-link:hover,
+    .read-more-link:focus {
+      border-color: #00FFC6;
+      outline: none;
     }
 
     .footer {
-      font-size: 12px;
-      color: #333;
-      margin-top: 20px;
+      margin-top: 30px;
+      font-size: 13px;
+      color: #555;
+      user-select: none;
+      text-align: center;
     }
 
     .feedback-button {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
-      background: #007AFF;
-      color: white;
-      padding: 8px 14px;
+      background: #00FFC6;
+      color: #000;
+      font-weight: 700;
       font-size: 14px;
-      font-weight: 500;
+      padding: 10px 18px;
+      border-radius: 10px;
       text-decoration: none;
-      border-radius: 8px;
-      transition: background-color 0.3s;
-      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,255,198,0.5);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+      z-index: 9999;
     }
-
-    .feedback-button:hover {
-      background: #005EC9;
+    .feedback-button:hover,
+    .feedback-button:focus {
+      background: #00cc9e;
+      color: #000;
+      outline: none;
+      box-shadow: 0 6px 16px rgba(0,204,158,0.7);
     }
   </style>
 </head>
 <body>
 
-<a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button">Feedback</a>
+  <a href="https://farmcraft9.github.io/farmcraft-software/feedback" class="feedback-button" tabindex="0">Feedback</a>
 
-<div class="blog-container" id="blog-container"></div>
+  <div class="blog-container" id="blog-container" role="main" aria-label="FarmCraft Software blog posts"></div>
 
-<p class="footer">FarmCraft Software 2025</p>
+  <footer class="footer">FarmCraft Software 2025</footer>
 
-<script>
-const blogPosts = [
-  {
-    title: "Field Simulator 2025 New GUI",
-    content: "New GUI for Field Simulator 2025 is here!",
-    date: "May 20, 2025",
-    link: "https://farmcraft9.github.io/farmcraft-software/news/blog3"
-  },
-  {
-    title: "Something is coming...",
-    content: "Something is coming to Field Simulator 2025 this month. Stay tuned!",
-    date: "May 6, 2025",
-    link: "https://farmcraft9.github.io/farmcraft-software/news/blog3"
-  },
-  {
-    title: "Top 5 mods in FS25",
-    content: "Hello everyone! Recently, I released a video titled 'Farming Simulator 25: Top 5 Mods You Need to Try Right Now!'. In this blog post, I will be rating the top 5 mods.",
-    date: "May 5, 2025",
-    link: "https://farmcraft9.github.io/farmcraft-software/news/blog2"
-  },
-    {
-    title: "New blog site!",
-    content: "I've made a new blog site! Here you will see latest news from Field Simulator 2025 and more! Stay tuned.",
-    date: "April 28, 2025",
-    link: "https://farmcraft9.github.io/farmcraft-software/news/blog1"
-  }
-];
+  <script>
+    const blogPosts = [
+      {
+        title: "Field Simulator 2025 New GUI",
+        content: "New GUI for Field Simulator 2025 is here!",
+        date: "May 20, 2025",
+        link: "https://farmcraft9.github.io/farmcraft-software/news/blog3"
+      },
+      {
+        title: "Something is coming...",
+        content: "Something is coming to Field Simulator 2025 this month. Stay tuned!",
+        date: "May 6, 2025",
+        link: "https://farmcraft9.github.io/farmcraft-software/news/blog3"
+      },
+      {
+        title: "Top 5 mods in FS25",
+        content: "Hello everyone! Recently, I released a video titled 'Farming Simulator 25: Top 5 Mods You Need to Try Right Now!'. In this blog post, I will be rating the top 5 mods.",
+        date: "May 5, 2025",
+        link: "https://farmcraft9.github.io/farmcraft-software/news/blog2"
+      },
+      {
+        title: "New blog site!",
+        content: "I've made a new blog site! Here you will see latest news from Field Simulator 2025 and more! Stay tuned.",
+        date: "April 28, 2025",
+        link: "https://farmcraft9.github.io/farmcraft-software/news/blog1"
+      }
+    ];
 
-function renderBlogPosts() {
-  const blogContainer = document.getElementById('blog-container');
+    function renderBlogPosts() {
+      const container = document.getElementById('blog-container');
+      blogPosts.forEach(post => {
+        const postEl = document.createElement('article');
+        postEl.className = 'blog-post';
+        postEl.innerHTML = `
+          <h2>${post.title}</h2>
+          <p>${post.content}</p>
+          <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="read-more-link" tabindex="0">Read More</a>
+          <p class="post-date">${post.date}</p>
+        `;
+        container.appendChild(postEl);
+      });
+    }
 
-  blogPosts.forEach((post) => {
-    const blogPostElement = document.createElement('div');
-    blogPostElement.classList.add('blog-post');
-
-    blogPostElement.innerHTML = `
-      <h2>${post.title}</h2>
-      <p>${post.content}</p>
-      <a class="read-more-link" href="${post.link}" target="_blank">Read More</a>
-      <p class="post-date">${post.date}</p>
-    `;
-
-    blogContainer.appendChild(blogPostElement);
-  });
-}
-
-renderBlogPosts();
-</script>
+    renderBlogPosts();
+  </script>
 
 </body>
 </html>
