@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Field Simulator 2025 Download</title>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAuthorized = urlParams.get("auth") === "true";
+
+    if (!isAuthorized) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.innerHTML = "<h1>403 Forbidden</h1><p>You don't have permission to access this resource.</p><a href='../index.html'>Go Back</a>";
+      });
+    }
+
+    function selectOS(os) {
+      const title = document.getElementById("downloadTitle");
+      const button = document.getElementById("downloadButton");
+
+      if (os === 'windows') {
+        title.textContent = "Field Simulator 2025 (Windows)";
+        button.href = "FieldSimulator2025Patch1.0.1.0.exe";
+        button.textContent = "Download EXE";
+        button.style.display = "inline-block";
+      } else if (os === 'mac') {
+        title.textContent = "Field Simulator 2025 (macOS)";
+        button.href = "FieldSimulator2025.dmg";
+        button.textContent = "Download DMG";
+        button.style.display = "inline-block";
+      }
+    }
+  </script>
+</head>
+<body>
+  <center>
+    <h2>Field Simulator 2025 Download</h2>
+
+    <h3 id="downloadTitle">Select your operating system:</h3>
+
+    <button onclick="selectOS('windows')">Windows</button>
+    <button onclick="selectOS('mac')">macOS</button>
+
+    <p style="margin-top: 20px;">
+      <a id="downloadButton" href="#" style="display: none;">Download</a>
+    </p>
+
+    <p style="margin-top: 50px;">FarmCraft Software 2025</p>
+  </center>
+</body>
+</html>
