@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WWDC 2025 Countdown</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100vh;
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        color: #fff;
+    }
+
+    /* Background bubbles */
+    .bubble {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: float 20s infinite ease-in-out;
+        filter: blur(50px);
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(100vh) scale(1);
+        }
+        50% {
+            transform: translateY(50vh) scale(1.2);
+        }
+        100% {
+            transform: translateY(-10vh) scale(1);
+        }
+    }
+
+    /* Glassy card */
+    .glassy {
+        backdrop-filter: blur(30px) saturate(180%);
+        -webkit-backdrop-filter: blur(30px) saturate(180%);
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 50px 80px;
+        text-align: center;
+        box-shadow: 0 12px 45px rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+
+    .title {
+        font-size: 2em;
+        margin-bottom: 25px;
+        font-weight: bold;
+        background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientText 6s ease-in-out infinite;
+    }
+
+    @keyframes gradientText {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .countdown {
+        font-size: 3em;
+        letter-spacing: 2px;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ff00ff;
+        }
+        100% {
+            text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff, 0 0 60px #00ffff;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- Bubble elements -->
+<div class="bubble" style="width: 400px; height: 400px; background: radial-gradient(circle, #ff00ff, transparent); left: 10%; animation-delay: 0s;"></div>
+<div class="bubble" style="width: 500px; height: 500px; background: radial-gradient(circle, #00ffff, transparent); left: 70%; animation-delay: 5s;"></div>
+<div class="bubble" style="width: 300px; height: 300px; background: radial-gradient(circle, #ff9900, transparent); left: 50%; animation-delay: 10s;"></div>
+<div class="bubble" style="width: 600px; height: 600px; background: radial-gradient(circle, #00ff88, transparent); left: 20%; animation-delay: 15s;"></div>
+
+<!-- Glassy card content -->
+<div class="glassy">
+    <div class="title">WWDC 2025 Countdown</div>
+    <div class="countdown" id="countdown">Loading...</div>
+</div>
+
+<!-- Countdown script -->
+<script>
+    const countdownElement = document.getElementById('countdown');
+    const targetDate = new Date('2025-06-09T19:00:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            countdownElement.innerHTML = "🎉 It's WWDC time! 🎉";
+            clearInterval(interval);
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownElement.innerHTML = 
+            `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown(); // Initial call
+    const interval = setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
