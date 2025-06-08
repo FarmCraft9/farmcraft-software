@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>FarmCraft Software</title>
-    <script>
+<head>
+  <meta charset="UTF-8">
+  <title>FarmCraft Software</title>
+  <script>
     const correctKeys = [
-    "RA46-DAKB-G2B4-JE6W", "8YYE-ZY6C-B1Y4-RCWW", "CF1Z-7ONY-GBD7-QF34",
-    "2TIC-FJ78-I80B-A6B6", "VQ9I-1262-B8T7-O0HL", "VKDC-4ORY-MY8I-5BZP",
-    "PV1K-MC5A-SQ06-9GP7", "UJD6-DLXN-F9I5-ES05", "6CIZ-M84Y-VTAB-0VOY",
-    "469R-C8WW-FRVY-Y3Z5", "L1QR-4FW3-SATX-ZK6U", "BE4H-RLW8-3MIS-R63J",
-    "Z3CH-JW90-Y63M-4J1I", "MG8S-EH6X-RMNR-QGT2", "SD9C-9XFT-K9ZO-2RRZ"
+      "RA46-DAKB-G2B4-JE6W", "8YYE-ZY6C-B1Y4-RCWW", "CF1Z-7ONY-GBD7-QF34",
+      "2TIC-FJ78-I80B-A6B6", "VQ9I-1262-B8T7-O0HL", "VKDC-4ORY-MY8I-5BZP",
+      "PV1K-MC5A-SQ06-9GP7", "UJD6-DLXN-F9I5-ES05", "6CIZ-M84Y-VTAB-0VOY",
+      "469R-C8WW-FRVY-Y3Z5", "L1QR-4FW3-SATX-ZK6U", "BE4H-RLW8-3MIS-R63J",
+      "Z3CH-JW90-Y63M-4J1I", "MG8S-EH6X-RMNR-QGT2", "SD9C-9XFT-K9ZO-2RRZ"
     ];
 
     function validateKey() {
       const key = document.getElementById("product-key").value.trim();
-      if (correctKeys.includes(key)) {
-        window.location.href = "hQw9FT6bJvRyPSxCN1uXZE5sgM0oWlzDkm2VrHKfIYta8enGcUb7LdOqpj3Ai4VB?auth=X5yLkW7CmTqPhv8S2ZGnF0jRe1UoJVx3IbNa9DYflszdQtHrEGwpBK6uOMCi4";
-      } else {
+
+      if (!correctKeys.includes(key)) {
         alert("Product key incorrect. Please try again.");
+        return;
       }
+
+      let count = parseInt(localStorage.getItem("downloadCount") || "0", 10);
+
+      if (count >= 10) {
+        alert("Download limit exceeded");
+        return;
       }
-    </script>
-        </head>
-        <body>
-        <center>
-        <h2>FarmCraft Software</h2>
-          <h3>Enter you product key</h3>
-      <form onsubmit="validateKey(); return false;">
-        <input type="text" id="product-key" size="30">
-        <input type="submit" value="Download">
-        </form>
-        </center>
-        </body>
-        </html>
+
+      count++;
+      localStorage.setItem("downloadCount", count);
+
+      window.location.href = "hQw9FT6bJvRyPSxCN1uXZE5sgM0oWlzDkm2VrHKfIYta8enGcUb7LdOqpj3Ai4VB?auth=X5yLkW7CmTqPhv8S2ZGnF0jRe1UoJVx3IbNa9DYflszdQtHrEGwpBK6uOMCi4";
+    }
+  </script>
+</head>
+<body>
+  <center>
+    <h2>FarmCraft Software</h2>
+    <h3>Enter your product key</h3>
+    <form onsubmit="validateKey(); return false;">
+      <input type="text" id="product-key" size="30" autocomplete="off" />
+      <input type="submit" value="Download" />
+    </form>
+  </center>
+</body>
+</html>
