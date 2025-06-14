@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>FarmField Feedback</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("p1dOYucs1hUUhalhE");
+
+    function sendFeedback() {
+      const templateParams = {
+        report_type: document.getElementById("report-type").value,
+        user_email: document.getElementById("user-email").value,
+        user_name: document.getElementById("user-name").value,
+        title: document.getElementById("title").value,
+        message: document.getElementById("message").value
+      };
+
+      emailjs.send("service_p89ekhv", "template_xa4a6um", templateParams)
+        .then(() => {
+          alert("Feedback sent! Thank you.");
+          document.getElementById("feedback-form").reset();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Sending failed. Try again later.");
+        });
+    }
+  </script>
+</head>
+<body>
+  <center>
+    <h2>FarmCraft Software</h2>
+    <h3>FarmField Feedback Form</h3>
+    <form id="feedback-form" onsubmit="sendFeedback(); return false;">
+      <p>
+        <select id="report-type" required>
+          <option value="bug">Report a Bug</option>
+          <option value="idea">Submit an Idea</option>
+          <option value="product-key">Request a Product Key</option>
+          <option value="unblock-product-key">Unblock Product Key</option>
+        </select>
+      </p>
+      <p><input type="email" id="user-email" placeholder="Your Email" required></p>
+      <p><input type="text" id="user-name" placeholder="Your Name" required></p>
+      <p><input type="text" id="title" placeholder="Title" required></p>
+      <p><textarea id="message" placeholder="Your Message" rows="4" cols="40" required></textarea></p>
+      <p><input type="submit" value="Submit Feedback"></p>
+    </form>
+  </center>
+</body>
+</html>
