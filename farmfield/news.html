@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>FarmCraft Software Blog</title>
+</head>
+<body>
+  <center>
+    <h2>FarmCraft Software</h2>
+    <h3>Blog Posts</h3>
+    <div id="blog-container"></div>
+    <p><a href="https://farmcraft9.github.io/farmcraft-software/feedback">Feedback</a></p>
+    <p>FarmCraft Software 2025</p>
+  </center>
+
+  <script>
+    const blogPosts = [
+      {
+        title: "FarmField in developement",
+        content: "FarmField is currently in developement! It will be released in late summer/early fall. Stay tuned!",
+        date: "June 14, 2025",
+      }
+    ];
+
+    function renderBlogPosts() {
+      const container = document.getElementById("blog-container");
+      blogPosts.forEach(post => {
+        const postEl = document.createElement("div");
+        postEl.innerHTML = `
+          <h4>${post.title}</h4>
+          <p>${post.content}</p>
+          <p><small>${post.date}</small></p>
+          <hr />
+        `;
+        container.appendChild(postEl);
+      });
+    }
+
+    renderBlogPosts();
+  </script>
+</body>
+</html>
