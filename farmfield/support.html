@@ -8,12 +8,16 @@
     emailjs.init("p1dOYucs1hUUhalhE");
 
     function sendFeedback() {
+      const now = new Date();
+      const timeString = now.toLocaleString(); // Formats the time nicely
+
       const templateParams = {
         report_type: document.getElementById("report-type").value,
         user_email: document.getElementById("user-email").value,
         user_name: document.getElementById("user-name").value,
         title: document.getElementById("title").value,
-        message: document.getElementById("message").value
+        message: document.getElementById("message").value,
+        time: timeString // This will replace {{time}} in your EmailJS template
       };
 
       emailjs.send("service_p89ekhv", "template_xa4a6um", templateParams)
