@@ -1,0 +1,454 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+/////////////////////////   (c) Miso Antonic 2007   ///////////////////////////
+
+
+  /////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////   Tools   //////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function ludvik_getTime() { return Math.round((new Date()).getTime() / 1000); }
+function ludvik_fix(s)
+{
+	var from = "Ä¾Å¡ÄÅ¥Å¾Ã½Ã¡Ã­Ã©ÃºÃ¤ÅˆÃ´ÄÄ½Å ÄŒÅ¤Å½ÃÃÃÃ‰ÃšÅ‡ÄŽ";
+	var	to = "lsctzyaieuanodLSCTZYAIEUND";
+	var result = '';
+
+	for (var i=0; i < s.length; i++)
+		if (from.indexOf(s.charAt(i)) != -1)
+			result += to.charAt(from.indexOf(s.charAt(i)));
+		else
+			result += s.charAt(i);
+	
+	return result;
+}
+
+  /////////////////////////////////////////////////////////////////////////////
+ /////////////////////////   Magic Animation 1.0   ///////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+// Animation styles used in Magic /////////////////////////////////////////////
+
+function ludvik_styleLinear(x) { return x; }
+function ludvik_styleSin(x) { return Math.sin(x*Math.PI/2); }
+function ludvik_stylePulse(x) { return (Math.sin(x*2*Math.PI) + 1) / 2; }
+function ludvik_styleBounce(x) { return (x == 0) ? 0 : (((-Math.sin(x*25)/(x*25))+1)*(1-x))+x; }
+function ludvik_styleBounceLess(x) { return (x == 0) ? 0 : (((-Math.sin(x*15)/(x*15))+1)*(1-x))+x; }
+
+// Magic Animation Core ///////////////////////////////////////////////////////
+
+ludvik_magic = new function ()
+{
+	this.effects = [];
+	this.interval;
+	this.frequency = 30;
+	
+	this.remove = function(effect)
+	{
+		var i = 0;
+		while (i < this.effects.length) 
+		  if (this.effects[i] == effect) 
+		    this.effects.splice(i, 1);
+		  else i++;
+				
+		if (this.effects.length == 0) 
+		  window.clearInterval(this.interval);
+	}
+	
+	this.tick = function()
+	{
+		for (var i=0; i<this.effects.length; i++)			
+			this.effects[i].tick();
+	}
+
+	this.add = function(effect)
+	{
+		this.effects.push(effect);
+		if (this.effects.length == 1)
+			this.interval = window.setInterval(function() {ludvik_magic.tick();}, this.frequency);	
+	}
+}
+
+
+function ludvik_effectObject(elementId, ticksToStart, speed, action, style, loop, coAction, endAction) 
+{		
+	this.elementId = elementId;
+	this.ticksToStart = ticksToStart;
+	this.speed = speed;
+	this.now = 0;
+	this.action = action;
+	this.coAction = coAction;
+	this.endAction = endAction;
+	this.loop = (loop == undefined) ? false : loop;
+	this.style = style;
+	this.tick = function()
+	{
+		if (this.ticksToStart > 0)
+		{
+			this.ticksToStart--;
+			return;
+		}
+		
+		if (this.now > 100)
+		{
+			if (this.loop)
+				this.now = 0;
+			else
+			{
+				ludvik_magic.remove(this);				
+				if (this.endAction != undefined) 
+					this.endAction();
+			}
+		}
+		else
+		{
+			if (document.getElementById(elementId) == null)
+			{
+				ludvik_magic.remove(this);
+				return;
+			}			
+			this.action();
+			
+			if (this.coAction != undefined)
+				this.coAction();
+			
+			this.now += this.speed;
+			if (this.now > 100) this.now = 101;			
+		}
+	}
+	
+	ludvik_magic.add(this);
+}
+
+// Magic Effects //////////////////////////////////////////////////////////////
+
+
+function ludvik_changeNumber(elementId, what, suffix, value1, value2, speed, ticksToStart, style, loop, coAction, endAction)
+{
+	action = function()
+	{
+		this.element.style[this.what] = Math.round(this.value1 + this.style(this.now/100)*(value2-value1)) + suffix;
+	}
+	effect = new ludvik_effectObject(elementId, ticksToStart, speed, action, style, loop, coAction, endAction);
+	effect.element = document.getElementById(elementId);
+	effect.what = what;
+	effect.value1 = value1;
+	effect.value2 = value2;
+}
+
+function ludvik_fade(elementId, opacity1, opacity2, speed, ticksToStart, style, loop, coAction, endAction)
+{
+	action = function()
+	{		
+		this.element.style.opacity = this.opacity1 + this.style(this.now/100) * (this.opacity2-this.opacity1);
+		this.element.style.filter = "alpha(opacity=" + this.element.style.opacity*100 + ")";
+	}
+	effect = new ludvik_effectObject(elementId, ticksToStart, speed, action, style, loop, coAction, endAction);
+	effect.element = document.getElementById(elementId);
+	effect.opacity1 = opacity1;
+	effect.opacity2 = opacity2;
+}
+
+function ludvik_move(elementId, top1, left1, top2, left2, speed, ticksToStart, style, loop, coAction, endAction)
+{	
+	ludvik_changeNumber(elementId, "top", "px", top1, top2, speed, ticksToStart, style, loop, coAction, endAction);
+	ludvik_changeNumber(elementId, "left", "px", left1, left2, speed, ticksToStart, style, loop);
+}
+
+function ludvik_scale(elementId, width1, height1, width2, height2, speed, ticksToStart, style, loop, coAction, endAction)
+{
+	ludvik_changeNumber(elementId, "width", "px", width1, width2, speed, ticksToStart, style, loop, coAction, endAction);
+	ludvik_changeNumber(elementId, "height", "px", height1, height2, speed, ticksToStart, style, loop);
+}
+
+function ludvik_morph(element1Id, element2Id, width1, height1, width2, height2, speed, ticksToStart, style, loop, coAction, endAction)
+{
+	ludvik_scale(element1Id, width1, height1, width2, height2, speed, ticksToStart, style, loop, coAction, endAction);
+	ludvik_scale(element2Id, width1, height1, width2, height2, speed, ticksToStart, style, loop);
+    ludvik_fade(element1Id, 1, 0, speed, ticksToStart, style, loop);
+    ludvik_fade(element2Id, 0, 1, speed, ticksToStart, style, loop);
+}
+
+  /////////////////////////////////////////////////////////////////////////////
+ //////////////////////////   ludvik Magic Effects   ////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function ludvik_removeElementById(id)
+{
+	var element = document.getElementById(id);
+	element.parent.removeChild(element);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+function ludvik_effectPulseButton() { ludvik_fade("ludvik_pulsebutton", 0, 1, 2, 0, ludvik_stylePulse, true); } // speed = 2
+function ludvik_effectScrollText() { /*document.getElementById("ludvik_greetings").style.left = Math.floor(Math.random()*1250-1000) + "px";*/ } //speed = 0.1
+
+function ludvik_effectTransform(welcome)
+{
+	var $ = function(id) { return document.getElementById(id); };
+	var speed = 5;
+
+	// Fade away the login form
+	$("ludvik_name").blur();
+	ludvik_fade("ludvik_loginform_elements", 1, 0, speed*2, 0, ludvik_styleSin);
+	
+	// Expand the gray area
+	ludvik_changeNumber("ludvik_loginform_container", "top", "px", 150, 0, speed, 0, ludvik_styleBounce);	
+	ludvik_changeNumber("ludvik_loginform_container", "height", "px", 130, 290, speed, 0, ludvik_styleBounce, false, null, 
+		function() { // when area is ready, continue transformation
+		
+			$("ludvik_container").style.backgroundPosition = "-250px 0px";
+	
+			var conversation = $("ludvik_loginform_container");
+			conversation.removeChild($("ludvik_loginform_elements"));
+			conversation.innerHTML += welcome;
+			conversation.setAttribute("id", "ludvik_conversation");
+			conversation.style.position = "relative";
+			conversation.style.textAlign = "left";
+			
+			var talkServer = $("ludvik_server");
+			conversation.style.height = talkServer.offsetHeight + 20 + "px";
+			
+			ludvik_morph("ludvik_photo", "ludvik_server", 117, 117, talkServer.offsetWidth, talkServer.offsetHeight, speed/2, 0, ludvik_styleBounce); 
+			
+			
+			ludvik_move("ludvik_photo", 10, 68, 10, 7, speed/2, 0, ludvik_styleBounce, false, null, 
+				function () { $("ludvik_content").removeChild($("ludvik_photo")); });
+
+			ludvik_changeNumber("ludvik_server", "marginLeft", "px", -59, -talkServer.offsetWidth/2-5, speed/2, 0, ludvik_styleBounce, false, null,  
+				function () { 
+					ludvik_resetIdleTimer();
+					talkServer.removeAttribute("id");
+					$("ludvik_sentence").removeAttribute(ludvik_disabled);			
+					$("ludvik_sentence").focus();
+					});
+			
+			$("ludvik_bottom").innerHTML = 
+				'<form id="ludvik_sentenceform" method="post" action="">' +
+						'<input type="text" id="ludvik_sentence" name="ludvik_sentence" size="30" value="" onKeyPress="return ludvik_submitNewSentence(this, event)" ' + ludvik_disabled + '="' + ludvik_disabled + '" />' +
+						'<input type="hidden" id="ludvik_name" name="ludvik_name" value="' + ludvik_name + '" />' +
+				'</form>'; 
+			
+			
+			});
+	
+	// Removes greetings and bottom text
+	$("ludvik_content").removeChild($("ludvik_greetings"));
+	$("ludvik_bottom").innerHTML = "";
+}
+
+function ludvik_effectShutdown()
+{
+	var $ = function(id) { return document.getElementById(id); };
+	var speed = 5;
+	
+	ludvik_clearIdleTimer();
+	
+	ludvik_changeNumber("ludvik_sentenceform", "marginTop", "px", 0, -100, speed, 0, ludvik_styleSin, false, null, null);
+	
+	ludvik_changeNumber("ludvik_bottom", "height", "px", 35, 130, speed*2, 10, ludvik_styleSin, false, null, 
+		function () {
+			$("ludvik_conversation").getElementsByTagName("div")[0].style.marginTop = "60px";
+			$("ludvik_conversation").style.height = $("ludvik_conversation").offsetHeight + 125 + "px";
+//			$("ludvik_conversation").style.top = "-125px";
+			$("ludvik_content").scrollTop += 125;
+			
+			$("ludvik_bottom").style.lineHeight = "18px";
+			$("ludvik_bottom").innerHTML = "<div id='ludvik_goodbye'>" + '<iframe src="https://web.archive.org/web/20240225190637/http://www.facebook.com/plugins/likebox.php?id=114771848578446&amp;width=270&amp;connections=0&amp;stream=false&amp;header=false&amp;height=62" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>' + "Ludvik ukon&#269;il rozhovor. <ul class='ludvik_list'><li><a href='' onclick='setTimeout(ludvik_submitLoad, 3000);'><b>Porozpr&#225;vaj</b></a> sa e&#353;te raz.</li><li><a href='https://web.archive.org/web/20240225190637/http://www.ludvik.sk'><b>Pridaj</b></a> Ludvika na svoju str&#225;nku.</li></ul></div>";
+			
+		}); 
+}
+
+function ludvik_effectAddSentences(shutdown, ads)
+{
+	var $ = function(id) { return document.getElementById(id); };
+	var speed = 5;
+
+	var talkServer = $("ludvik_server");
+	var talkClient = $("ludvik_client");
+	
+	var oldHeight = $("ludvik_conversation").offsetHeight;
+	var newHeight = talkServer.offsetTop + talkServer.offsetHeight + (shutdown ? 65 : $("ludvik_bottom").offsetHeight);//    oldHeight + talkServer.offsetHeight + talkClient.offsetHeight + 19;
+	
+	ludvik_changeNumber("ludvik_conversation", "height", "px", oldHeight, newHeight, speed*2, 0 , ludvik_styleSin, false, 
+		function () { with ($("ludvik_content")) { scrollTop = scrollHeight; }; },
+		function () {
+			ludvik_scale("ludvik_client", talkClient.offsetWidth, 0, talkClient.offsetWidth, talkClient.offsetHeight, speed, 0, ludvik_styleSin);
+			ludvik_changeNumber("ludvik_client", "marginTop", "px", 100, 0, speed*3, 0, ludvik_styleSin);
+			ludvik_fade("ludvik_client", 0, 1, speed, 0, ludvik_styleSin, false, null, 
+				function () { $("ludvik_client").removeAttribute("id"); });
+			
+			ludvik_changeNumber("ludvik_server", "marginLeft", "px", 0, -talkServer.offsetWidth/2-5, speed, 15, ludvik_styleBounceLess);						
+			ludvik_changeNumber("ludvik_server", "height", "px", 30, talkServer.offsetHeight, speed, 15, ludvik_styleBounceLess);
+			ludvik_fade("ludvik_server", 0, 1, speed, 15, ludvik_styleBounceLess, false, null, 
+				function () { 
+					$("ludvik_server").removeAttribute("id");
+					$("ludvik_sentence").removeAttribute(ludvik_disabled);
+					$("ludvik_sentence").focus();					
+					
+					if (shutdown) 
+						ludvik_effectShutdown();
+					else
+						ludvik_resetIdleTimer();
+					
+					if (ads != "")
+					{
+						$("ludvik_top").innerHTML = ads;
+						ludvik_changeNumber("ludvik_top", "height", "px", 0, 65, speed*2, 10, ludvik_styleSin);
+					}
+					else
+					{
+						if ($("ludvik_top").style.height == "65px")
+							ludvik_changeNumber("ludvik_top", "height", "px", 65, 0, speed*2, 10, ludvik_styleSin);
+					}
+					}); });
+}
+
+
+  //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////// Other interface effects /////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+function ludvik_resetIdleTimer()
+{
+	ludvik_clearIdleTimer();
+	ludvik_idleTimer = setTimeout(ludvik_submitIdle, 20000);
+}
+
+function ludvik_clearIdleTimer()
+{
+	if (ludvik_idleTimer != undefined)
+		clearTimeout(ludvik_idleTimer);
+}
+
+  //////////////////////////////////////////////////////////////////////////////
+ /////////////////////////////////   Ajax   ///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+function ludvik_send(message, callback)
+{
+	ludvik_callback = callback;
+	ludvik_script = document.createElement("script");
+	ludvik_script.src = "https://web.archive.org/web/20240225190637/http://www.ludvik.sk/system.php?" + message;
+	document.getElementsByTagName("head")[0].appendChild(ludvik_script);
+}
+
+function ludvik_receive(data)
+{
+	document.getElementsByTagName("head")[0].removeChild(ludvik_script);
+	ludvik_callback(data);
+}
+
+function ludvik_submitLoad()
+{			
+	ludvik_send("cache=" + Math.floor(Math.random()*10000),
+		function (data) {
+			ludvik_idleTimer = undefined;
+			document.getElementById("ludvik").innerHTML = data;
+
+			// Adds a CSS link to a client site
+			if (document.createStyleSheet)
+				document.createStyleSheet("https://web.archive.org/web/20240225190637/http://www.ludvik.sk/style/style.css");
+			else
+			{
+				var linkElement = document.createElement('link');
+				linkElement.rel = 'stylesheet';
+				linkElement.href = 'data:text/css,' + escape("@import url('https://web.archive.org/web/20240225190637/http://www.ludvik.sk/style/style.css');");
+				document.getElementsByTagName("head")[0].appendChild(linkElement);
+			}		
+			
+			ludvik_effectPulseButton();
+			ludvik_effectScrollText(); 
+			
+			// ludvik_name = 'Klient';
+			// ludvik_send("login=true&name=" + ludvik_name + "&time=" + ludvik_getTime(),
+			//     function (data) { 
+			//         ludvik_effectTransform(data); });
+				
+			});	
+}
+
+function ludvik_submitNewSentence(myfield, e)
+{	
+	ludvik_resetIdleTimer();
+	var $ = function(id) { return document.getElementById(id); };
+	var key = (window.event)?(window.event.keyCode):((e)?(e.which):(0));
+	
+	if (key == 13 && myfield.value != "")
+	{
+		ludvik_clearIdleTimer();
+	    $("ludvik_sentence").setAttribute(ludvik_disabled, ludvik_disabled);
+		
+		ludvik_send("sentence=" + ludvik_fix($("ludvik_sentence").value) + "&name=" + $("ludvik_name").value + "&time=" + ludvik_getTime(),
+			function (data) {
+				var responseArray = data.split("|");
+				$("ludvik_conversation").innerHTML += responseArray[0];
+				$("ludvik_sentence").value = '';
+				ludvik_effectAddSentences(responseArray[1] == "shutdown", responseArray[2]); });
+	}
+	return key != 13;
+}
+
+function ludvik_submitIdle()
+{
+	var $ = function(id) { return document.getElementById(id); };
+	if ($("ludvik_sentence") == undefined) return;
+	$("ludvik_sentence").setAttribute("readonly", "readonly");		
+	ludvik_send("sentence=&name=" + $("ludvik_name").value + "&time=" + ludvik_getTime() + "&idle=true",
+		function (data) {
+			var responseArray = data.split("|");
+			$("ludvik_conversation").innerHTML += responseArray[0];
+			ludvik_effectAddSentences(responseArray[1] == "shutdown", responseArray[2]); });
+}
+
+function ludvik_submitLogin(myfield, e)
+{	
+	ludvik_name = document.getElementById("ludvik_name").value;
+	var key = (window.event)?(window.event.keyCode):((e)?(e.which):(0));
+	if (ludvik_name !="" && (key == 13 || myfield.name != "ludvik_name"))
+	{				
+		ludvik_name = ludvik_fix(ludvik_name).replace(/[^a-zA-Z0-9 _]+/g, '').substring(0, 15);
+		ludvik_send("login=true&name=" + ludvik_name + "&time=" + ludvik_getTime(),
+			function (data) { 
+				ludvik_effectTransform(data); });
+	}
+	return key != 13;
+}
+
+/////////////////////////////   Load the login window   //////////////////////////////
+ludvik_disabled = (navigator.appName == "Microsoft Internet Explorer" ? "disabled" : "readonly");
+ludvik_callback = undefined;
+ludvik_submitLoad();
+
+}
+/*
+     FILE ARCHIVED ON 19:06:37 Feb 25, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:12:51 Jun 19, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 1.183
+  exclusion.robots: 0.036
+  exclusion.robots.policy: 0.022
+  esindex: 0.014
+  cdx.remote: 26.193
+  LoadShardBlock: 183.709 (3)
+  PetaboxLoader3.datanode: 119.015 (4)
+  PetaboxLoader3.resolve: 129.274 (2)
+  load_resource: 114.82
+*/
